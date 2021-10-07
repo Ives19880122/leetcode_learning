@@ -64,6 +64,7 @@ import java.util.Stack;
   * title：Valid Parentheses
   * author: Ives.He
   * date：2021-10-07 12:47:01
+  * version2 : char
 */
 public class ValidParentheses {
     public static void main(String[] args) {
@@ -74,19 +75,17 @@ public class ValidParentheses {
 class Solution {
     public boolean isValid(String s) {
         if(s.length()%2!=0) return false; // 單數判斷
-        String[] arr = s.split("");
-        Map<String,String> map = new HashMap<>();
-        map.put("(",")");
-        map.put("[","]");
-        map.put("{","}");
+        char[] arr = s.toCharArray();
         int step =0;
-        Stack<String> tmp = new Stack();
+        Stack<Character> tmp = new Stack();
         while (step<arr.length){
-            if("(".equals(arr[step]) ||
-                    "[".equals(arr[step]) ||
-                    "{".equals(arr[step]) ){
+            char cur = arr[step];
+            if('('== cur ||'['== cur ||'{'== cur){
                 tmp.push(arr[step]);
-            }else if(tmp.isEmpty() || !arr[step].equals (map.get(tmp.pop()))){
+            }else if(tmp.isEmpty() ||
+                    ( ')'== cur && '('!= tmp.pop()) ||
+                    ( ']'== cur && '['!= tmp.pop()) ||
+                    ( '}'== cur && '{'!= tmp.pop())) {
                 return false;
             }
             step++;
