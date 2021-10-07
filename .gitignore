@@ -1,3 +1,5 @@
 /.idea/
 /leetcode.iml
 /src/main/java/leetcode/editor/en/doc/
+/lib/
+/out/
