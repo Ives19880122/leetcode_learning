@@ -54,19 +54,22 @@ public class P53_MaximumSubarray{
   //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int maxSubArray(int[] nums) {
-        int max = nums[0];
-        if(nums.length == 1){
-            return max;
+        int n = nums.length;
+        // 收集暫存
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        for(int i = 1; i<nums.length; i++){
+            // 如果當前數字大於,前一數字＋當前數字,則回傳當前數字
+            dp[i] = Math.max(nums[i],nums[i]+dp[i-1]);
         }
-        for(int o = 0; o<nums.length; o++){
-            int tmp = 0;
-            for( int i = o; i<nums.length; i++){
-                tmp += nums[i];
-                if(tmp > max) max = tmp;
-            }
+        int res = Integer.MIN_VALUE;
+        // 比對取得答案
+        for( int i = 0; i< dp.length; i++){
+            res = Math.max(res,dp[i]);
         }
-        return max;
+        return res;
     }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
