@@ -52,7 +52,15 @@ public class P58_LengthOfLastWord{
 //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int lengthOfLastWord(String s) {
-            return  0;
+            String n = s.trim();
+            int end = n.length() -1;
+            if (end == -1) {
+                return -1;
+            }
+            int idx = n.lastIndexOf(" ");
+            return  idx > -1
+                    ? end - idx
+                    : end + 1;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
