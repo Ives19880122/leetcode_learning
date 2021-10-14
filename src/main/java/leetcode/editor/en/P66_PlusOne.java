@@ -75,24 +75,21 @@ public class P66_PlusOne{
   //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] plusOne(int[] digits) {
-        // stack收集 雙迴圈
-        Stack<Integer> dp = new Stack<>();
-        int r = digits.length-1;
-        int plus = 1;
-        while (r>=0){
-            int tmp = digits[r] + plus;
-            dp.push(tmp%10);
-            plus = tmp/10;
-            if(r==0 && plus >0){
-                dp.push(plus);
+        // 網路參考
+        int len = digits.length;
+        for(int i =len-1; i>=0; i--){
+            // 不進位就直接回傳陣列
+            if(digits[i]<9){
+                digits[i]++;
+                return digits;
+            }else{
+                digits[i]=0;
             }
-            r--;
         }
-        digits = new int[dp.size()];
-        r = 0;
-        while(!dp.isEmpty()){
-            digits[r] = dp.pop();
-            r++;
+        // 跑到最後一位的時候要判斷有沒有被進位
+        if(digits[0]==0){
+            digits = new int[len+1];
+            digits[0] = 1;
         }
         return digits;
     }
