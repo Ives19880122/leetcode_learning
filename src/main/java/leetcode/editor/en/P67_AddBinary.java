@@ -39,47 +39,37 @@ class Solution {
         Stack<String> dp = new Stack<>();
         int l = a.length()-1;
         int r = b.length()-1;
-        int len = l > r ? l : r;
-        char plus = '0';
+        int plus = 0;
         while (l>=0 || r >= 0) {
             char tl = '0';
             char tr = '0';
-            if (l >= len) {
-                tl = a.charAt(len);
+            String tmp = "";
+            if (l >= 0) {
+                tl = a.charAt(l);
             }
-            if (r >= len) {
-                tr = a.charAt(len);
+            if (r >= 0) {
+                tr = b.charAt(r);
             }
             if (tl == tr) {
-                if (tl == '1' && plus == '1') {
-                    dp.push("1");
-                    plus = '1';
-                } else if (tl == '1' && plus == '0') {
-                    dp.push("0");
-                    plus = '1';
-                } else if (tl == '0' && plus =='1'){
-                    dp.push("1");
-                    plus = '0';
-                }else {
-                    dp.push("0");
-                    plus = '0';
+                tmp = plus == 1 ? "1" : "0";
+                if (tl == '1') {
+                    plus = 1;
+                }else{
+                    plus = 0;
                 }
             } else {
-                if (tl == '0' && plus == '1') {
-                    dp.push("0");
-                    plus = '1';
-                } else if (tl == '0' && plus == '0'){
-                    dp.push("1");
-                    plus = '0';
-                }
-                else {
-                    dp.push("1");
-                    plus = '0';
+                if (plus == 1) {
+                    tmp = "0";
+                    plus = 1;
+                } else{
+                    tmp = "1";
                 }
             }
-            len--;
+            l--;
+            r--;
+            dp.push(tmp);
         }
-        if(plus == '1'){
+        if(plus == 1){
             dp.push("1");
         }
         String res = "";

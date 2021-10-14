@@ -1,6 +1,6 @@
 package leetcode.editor.en;
 
-import leetcode.editor.en.P66_PlusOne .Solution;
+import leetcode.editor.en.P66_PlusOne.Solution;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
