@@ -40,4 +40,11 @@ public class P69_Sqrtx_Test {
         int o = (int)Math.pow(i,0.5);
         Assert.assertEquals(o,solution.mySqrt(i));
     }
+
+    @Test
+    public void test3(){
+        int i = 1;
+        int o = 1;
+        Assert.assertEquals(o,solution.mySqrt(i));
+    }
 }

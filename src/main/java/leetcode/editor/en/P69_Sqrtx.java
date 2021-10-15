@@ -49,11 +49,18 @@ class Solution {
         double target = x;
         double idx = 0;
         while(idx<=target){
-            if(idx*idx == target){
+            double mid = idx + (target-idx)/2;
+            if(mid*mid == x){
+                return (int)mid;
+            }else if(mid*mid<x){
+                idx = mid;
+            }
+
+            if(idx*idx == x){
                 return (int)idx;
-            }else if(idx*idx < target){
+            }else if(idx*idx < x){
                 idx += 1;
-            }else if(idx*idx > target){
+            }else if(idx*idx > x){
                 return (int)idx-1;
             }
         }
