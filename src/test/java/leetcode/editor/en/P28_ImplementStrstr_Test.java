@@ -3,11 +3,12 @@ package leetcode.editor.en;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import leetcode.editor.en.P28_ImplementStrstr.Solution;
 
-public class P28_ImplementStrstr {
+public class P28_ImplementStrstr_Test {
     private Solution solution;
     @Before
-    public void setup() {this.solution = new Solution();}
+    public void setup() {this.solution = new P28_ImplementStrstr().new Solution();}
 
     @Test
     public void testExample3(){

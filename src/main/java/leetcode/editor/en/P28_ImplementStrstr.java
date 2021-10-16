@@ -36,9 +36,10 @@ package leetcode.editor.en;
  * id: 28
  * title: Implement strStr()
  * author: Ives.He 
- * date: 2021-10-07 22:51:57 
+ * date: 2021-10-07 22:51:57
+ * import leetcode.editor.en.P28_ImplementStrstr.Solution;
  */
-//public class ImplementStrstr{
+public class P28_ImplementStrstr{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int strStr(String haystack, String needle) {
@@ -61,4 +62,4 @@ class Solution {
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
-//}
+}
