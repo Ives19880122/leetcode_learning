@@ -72,17 +72,16 @@ class Solution {
         int left = 0;
         int right = 0;
         int[] tmp = new int[m];
-        // save num1 to tmp
-        for(int i = 0; i<m; i++){
-            tmp[i] = nums1[i];
-        }
         int idx = 0;
         // avoid out of index
         while(idx<nums1.length){
+            // save num1 to tmp
+            if(idx<m){
+                tmp[idx] = nums1[idx];
+            }
             if(left < m && right < n){
                 if(tmp[left] == nums2[right]){
                     nums1[idx++] = tmp[left++];
-                    nums1[idx++] = nums2[right++];
                 }else if(tmp[left] > nums2[right]){
                     nums1[idx++] =  nums2[right++];
                 }else if(tmp[left]<nums2[right]){
