@@ -83,29 +83,17 @@ public class P94_BinaryTreeInorderTraversal{
  */
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
-        Stack<TreeNode> top = new Stack<>();
-        TreeNode tmp = root;
-        List<Integer> res = new ArrayList<>();
-        while(tmp != null || !top.isEmpty()){
-            // 最下面節點想跳回根目錄時
-            if(tmp == null && !top.isEmpty()){
-                tmp = top.pop();    // 取出暫存
-                res.add(tmp.val);   // 塞入根節點
-                tmp = tmp.right;    // 轉移至右節點
-            // 左邊節點存在則一路往下衝
-            }else if(tmp.left!=null){
-                top.push(tmp);      // 儲存暫存
-                tmp = tmp.left;     // 轉移至左節點
-            // 右邊節點存在,塞入中間值,轉移至右邊節點
-            }else if(tmp.right != null){
-                res.add(tmp.val);   // 加入目前的值
-                tmp = tmp.right;    // 轉移至右節點
-            }else if(tmp.right == null){
-                res.add(tmp.val);   // 加入目前的值
-                tmp = null;         // 觸發返回上一層
-            }
+        List<Integer> list = new ArrayList<>();
+        if(root == null) return list;
+        inorderTraversal(root,list);
+        return list;
+    }
+    void inorderTraversal(TreeNode r, List<Integer> list){
+        if(r != null){
+          inorderTraversal(r.left,list);
+          list.add(r.val);
+          inorderTraversal(r.right,list);
         }
-        return res;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
