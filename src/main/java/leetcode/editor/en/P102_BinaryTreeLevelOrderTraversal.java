@@ -67,37 +67,19 @@ public class P102_BinaryTreeLevelOrderTraversal{
  * }
  */
 class Solution {
+    List<List<Integer>> result = new LinkedList<>();
     public List<List<Integer>> levelOrder(TreeNode root) {
-        // 遞迴改寫
-        List<List<Integer>> result = new ArrayList<>();
-        if(root == null) return result;
-        Queue<TreeNode> que = new LinkedList<>();
-        que.offer(root);
-        helper(que,result);
+        // 參考簡化
+        if(root != null) helper(root,0);
         return result;
     }
-    void helper(Queue<TreeNode>que, List<List<Integer>> result){
-        if(!que.isEmpty()) {
-            // stored each level
-            List<Integer> stored = new ArrayList<>();
-            int end = que.size();
-            // iterator all same level elements
-            for (int i = 0; i < end; i++) {
-                // 取出當前結果
-                TreeNode tmp = que.poll();
-                stored.add(tmp.val);
-                if (tmp.left != null) {
-                    que.offer(tmp.left);
-                }
-                if (tmp.right != null) {
-                    que.offer(tmp.right);
-                }
-            }
-            result.add(stored);
-            helper(que,result);
-        }
-
+    void helper(TreeNode node, int level){
+        if(result.size()==level)result.add(new ArrayList<>());
+        result.get(level).add(node.val);
+        if (node.left != null) helper(node.left,level+1);
+        if (node.right != null) helper(node.right,level+1);
     }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
