@@ -74,29 +74,17 @@ public class P104_MaximumDepthOfBinaryTree{
  * }
  */
 class Solution {
-    int level = 0;
     public int maxDepth(TreeNode root) {
-        if(root!=null){
-            Queue<TreeNode> que = new LinkedList<>();
-            que.offer(root);
-            helper(que,1);
-        }
-        return level;
+        // 提供初始值
+        return helper(root,0);
     }
-    void helper(Queue<TreeNode> que, int step){
-        if(!que.isEmpty()){
-            int end = que.size();
-            Queue<TreeNode> cur = new LinkedList<>();
-            while(!que.isEmpty()){
-                TreeNode tmp = que.poll();
-                if(tmp.left!=null)
-                    cur.offer(tmp.left);
-                if(tmp.right!=null)
-                    cur.offer(tmp.right);
-            }
-            level = step;
-            helper(cur,step+1);
-        }
+    int helper(TreeNode root, int level){
+        // 若為空則回傳當下深度
+        if(root == null) return level;
+        // 若不為空則將深度+1
+        if(root != null) level++;
+        // 傳入左右樹進行preOrder遍歷,比對得到較大的答案
+        return Math.max(helper(root.left,level),helper(root.right,level));
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
