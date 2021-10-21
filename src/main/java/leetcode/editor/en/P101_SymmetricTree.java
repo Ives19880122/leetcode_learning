@@ -61,24 +61,13 @@ public class P101_SymmetricTree {
      */
     class Solution {
         public boolean isSymmetric(TreeNode root) {
-            TreeNode r = root.right;
-            Stack<TreeNode> tmr = new Stack<>();
-            TreeNode l = root.left;
-            Stack<TreeNode> tml = new Stack<>();
-            while (r != null || l != null || (!tml.empty() && !tml.empty())) {
-                if (r != null && l != null && r.val == l.val) {
-                    tml.push(l.right);
-                    l = l.left;
-                    tmr.push(r.left);
-                    r = r.right;
-                } else if (r == null && l == null && !tml.isEmpty() && !tmr.isEmpty()) {
-                    l = tml.pop();
-                    r = tmr.pop();
-                } else {
-                    return false;
-                }
-            }
-            return true;
+            return isSymmetric(root.left,root.right);
+        }
+        boolean isSymmetric(TreeNode l, TreeNode r){
+            if(l==null && r==null)return true;
+            if(l==null || r==null)return false;
+            if(l.val!=r.val)return false;
+            return isSymmetric(l.right,r.left)&&isSymmetric(l.left,r.right);
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
