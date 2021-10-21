@@ -68,28 +68,14 @@ public class P100_SameTree{
  */
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        TreeNode l = p;
-        Stack<TreeNode> tml = new Stack<>();
-        TreeNode r = q;
-        Stack<TreeNode> tmr = new Stack<>();
-        while(l!=null||r!=null||!tml.empty()||!tmr.isEmpty()){
-            if((l==null&&r!=null)||(l!=null&&r==null)||tmr.size()!=tml.size()){
-                // 其中之一為空時
-                return false;
-            }else if(l==null&&r==null&&!tml.empty()&&!tmr.empty()){
-                l=tml.pop();
-                r=tmr.pop();
-            }else if(l.val == r.val){
-                tml.push(l.right);
-                l = l.left;
-                tmr.push(r.right);
-                r = r.left;
-            }else{
-                return false;
-            }
+        if(p==null && q==null){
+            return true;
+        }else if(p==null||q==null){
+            return false;
+        }else if(p.val != q.val){
+            return false;
         }
-        // 若雙方資料為空時
-        return true;
+        return isSameTree(p.left,q.left)&&isSameTree(p.right,q.right);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
