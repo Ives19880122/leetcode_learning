@@ -68,31 +68,35 @@ public class P102_BinaryTreeLevelOrderTraversal{
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        // BFS寫法
+        // 遞迴改寫
         List<List<Integer>> result = new ArrayList<>();
         if(root == null) return result;
         Queue<TreeNode> que = new LinkedList<>();
-        TreeNode cur = root;
-        que.offer(cur);
-        while(!que.isEmpty()) {
+        que.offer(root);
+        helper(que,result);
+        return result;
+    }
+    void helper(Queue<TreeNode>que, List<List<Integer>> result){
+        if(!que.isEmpty()) {
             // stored each level
             List<Integer> stored = new ArrayList<>();
             int end = que.size();
             // iterator all same level elements
             for (int i = 0; i < end; i++) {
                 // 取出當前結果
-                cur = que.poll();
-                stored.add(cur.val);
-                if (cur.left != null) {
-                    que.offer(cur.left);
+                TreeNode tmp = que.poll();
+                stored.add(tmp.val);
+                if (tmp.left != null) {
+                    que.offer(tmp.left);
                 }
-                if (cur.right != null) {
-                    que.offer(cur.right);
+                if (tmp.right != null) {
+                    que.offer(tmp.right);
                 }
             }
             result.add(stored);
+            helper(que,result);
         }
-        return result;
+
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
