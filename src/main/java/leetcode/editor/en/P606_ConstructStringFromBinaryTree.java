@@ -61,23 +61,24 @@ public class P606_ConstructStringFromBinaryTree{
  * }
  */
 class Solution {
+    // 裝載結果
+    StringBuffer sb = new StringBuffer();
     public String tree2str(TreeNode root) {
-        StringBuffer sb = new StringBuffer();
-        helper(root,sb);
+        helper(root);
         return sb.toString();
     }
-    void helper(TreeNode root,StringBuffer sb) {
+    void helper(TreeNode root) {
         if(root!=null){
-            if (root.left == null && root.right == null) {
-                sb.append(root.val);
-            } else {
-                sb.append(root.val).append("(");
+            sb.append(root.val);
+            // 在left,right其中之一不為空值進入此判斷
+            if (root.left != null || root.right != null) {
+                sb.append("(");
                 if (root.left != null) {
-                    helper(root.left, sb);
+                    helper(root.left);
                 }
                 if (root.right != null) {
                     sb.append(")(");
-                    helper(root.right, sb);
+                    helper(root.right);
                 }
                 sb.append(")");
             }
