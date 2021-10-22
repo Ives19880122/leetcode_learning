@@ -58,20 +58,18 @@ public class P111_MinimumDepthOfBinaryTree{
  * }
  */
 class Solution {
+    int result = 0;
     public int minDepth(TreeNode root) {
-        if(root==null) return 0;
-        return helper(root,1);
+        // 若為空直接回傳0
+        if(root!=null) helper(root,1);
+        return result;
     }
-    int helper(TreeNode root,int level){
-        if (root.left!=null && root.right != null){
-            return Math.min(helper(root.right,level+1),helper(root.left,level+1));
-        }else if(root.left!=null) {
-            return helper(root.left, level + 1);
-        }else if(root.right!=null) {
-            return helper(root.right, level + 1);
-        }else {
-            return level;
-        }
+    void helper(TreeNode root,int level){
+        if(root.left !=null) helper(root.left, level + 1);
+        if(root.right!=null) helper(root.right, level + 1);
+        // 只有在leaf才更新result
+        if(root.left==null && root.right == null)
+            result = result == 0 ? level : Math.min(result,level);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
