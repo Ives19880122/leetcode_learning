@@ -62,16 +62,26 @@ public class P606_ConstructStringFromBinaryTree{
  */
 class Solution {
     public String tree2str(TreeNode root) {
-        if(root==null) return "";
-        if(root.left==null&&root.right==null) return String.valueOf(root.val);
-        return String.format("%s",helper(root));
+        StringBuffer sb = new StringBuffer();
+        helper(root,sb);
+        return sb.toString();
     }
-    String helper(TreeNode root){
-        if(root.left==null&&root.right==null) return String.format("%d",root.val);
-        if(root.left!=null&&root.right!=null) return String.format("%d(%s)(%s)",root.val,helper(root.left),helper(root.right));
-        return root.left !=null
-                ? String.format("%d(%s)",root.val,helper(root.left))
-                : String.format("%d()(%s)",root.val,helper(root.right));
+    void helper(TreeNode root,StringBuffer sb) {
+        if(root!=null){
+            if (root.left == null && root.right == null) {
+                sb.append(root.val);
+            } else {
+                sb.append(root.val).append("(");
+                if (root.left != null) {
+                    helper(root.left, sb);
+                }
+                if (root.right != null) {
+                    sb.append(")(");
+                    helper(root.right, sb);
+                }
+                sb.append(")");
+            }
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
