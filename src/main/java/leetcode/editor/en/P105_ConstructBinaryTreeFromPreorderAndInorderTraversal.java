@@ -34,10 +34,7 @@
     
 package leetcode.editor.en;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * id: 105
@@ -66,37 +63,29 @@ public class P105_ConstructBinaryTreeFromPreorderAndInorderTraversal{
  * }
  */
 class Solution {
+    Map<Integer,Integer> map = new HashMap<>();
+    int n = 0;
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        Queue<Integer> que = new LinkedList<>();
-        List<Integer> list = new ArrayList<>();
-        for(int i=0; i<preorder.length;i++){
-            que.add(preorder[i]);
-            list.add(inorder[i]);
+        int len = inorder.length;
+        for(int i=0; i<len;i++){
+            map.put(inorder[i],i);
         }
-        return helper(que,list);
+        return helper(preorder,0,len-1);
     }
-    TreeNode helper(Queue<Integer> que, List<Integer> list){
-        int root = que.poll();
-        int idx = list.indexOf(root);
-        List<Integer> tmp = new ArrayList<>();
-        int i;
-        // left
-        i = 0;
-        while(i<idx){
-            tmp.add(list.get(i));
-            i++;
+    TreeNode helper(int[] preorder, int start, int end){
+        if(start>end){
+            return null;
         }
-        TreeNode left = tmp.size()>0 ? helper(que,tmp) : null;
-        // clear tmp and i
-        tmp.clear();
-        i = idx+1;
-        // right
-        while (i<list.size()){
-            tmp.add(list.get(i));
-            i++;
+        int val = preorder[n++];
+        int idx = map.get(val);
+        TreeNode node = new TreeNode(val);
+        if(start!=end){
+            //left
+            node.left = helper(preorder,start,idx-1);
+            //right
+            node.right = helper(preorder,idx+1,end);
         }
-        TreeNode right = tmp.size()>0? helper(que,tmp):null;
-        return new TreeNode(root,left,right);
+        return node;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
