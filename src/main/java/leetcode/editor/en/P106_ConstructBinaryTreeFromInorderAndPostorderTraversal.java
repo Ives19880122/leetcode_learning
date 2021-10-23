@@ -34,10 +34,7 @@
     
 package leetcode.editor.en;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * id: 106
@@ -66,32 +63,32 @@ public class P106_ConstructBinaryTreeFromInorderAndPostorderTraversal{
  * }
  */
 class Solution {
+    Map<Integer,Integer> map = new HashMap<>();
+    int n;
     public TreeNode buildTree(int[] inorder, int[] postorder) {
-        Stack<Integer> stack = new Stack<>();
-        List<Integer> list = new ArrayList<>();
-        // 轉換資料格式
-        for(int i=0; i<inorder.length; i++){
-            stack.push(postorder[i]);
-            list.add(inorder[i]);
+        int len = inorder.length;
+        // 建立索引資料
+        for(int i=0; i<len; i++){
+            map.put(inorder[i],i);
         }
-        return helper(list,stack);
+        n = len-1;
+        return helper(inorder,postorder,0,len-1);
     }
-    TreeNode helper(List<Integer> list, Stack<Integer> stack){
-        int root = stack.pop();
-        int idx = list.indexOf(root);
-        // 右樹區域
-        List<Integer> r = new ArrayList<>();
-        for(int i=idx+1; i<list.size(); i++){
-            r.add(list.get(i));
+    TreeNode helper(int[]inorder,int[]postorder,int start, int end){
+        if(start>end){
+            return null;
         }
-        TreeNode right = r.size()>0 ? helper(r,stack) : null;
-        // 左樹區域
-        List<Integer> l = new ArrayList<>();
-        for(int i=0; i<idx; i++){
-            l.add(list.get(i));
+        int val = postorder[n--];
+        TreeNode root = new TreeNode(val);
+        // 表示還有子節點
+        if(start!=end){
+            int idx = map.get(val);
+            // 右樹區域
+            root.right = helper(inorder, postorder,idx+1,end);
+            // 左樹區域
+            root.left = helper(inorder, postorder,start,idx-1);
         }
-        TreeNode left = l.size()>0 ? helper(l,stack) : null;
-        return new TreeNode(root, left ,right);
+        return root;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
