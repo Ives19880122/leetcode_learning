@@ -70,7 +70,7 @@ public class P98_ValidateBinarySearchTree{
  * }
  */
 class Solution {
-    Stack<Integer> stack = new Stack<>();
+    Integer oldVal;
     Boolean valid = true;
     public boolean isValidBST(TreeNode root) {
         inorderValid(root);
@@ -80,10 +80,10 @@ class Solution {
         // 使用inorder比對資料,發現前面已經有不合格節點,則不用繼續驗證
         if(node != null && valid==true) {
             isValidBST(node.left);
-            // 加入前驗證資料,改用stack避免迴圈效能消耗
-            if (!stack.isEmpty() && stack.peek() >= node.val)
+            // 用Integer oldVal 儲存前一個節點資料進行比對
+            if (oldVal!= null && oldVal >= node.val)
                 valid = false;
-            stack.add(node.val);
+            oldVal = node.val;
             isValidBST(node.right);
         }
     }
