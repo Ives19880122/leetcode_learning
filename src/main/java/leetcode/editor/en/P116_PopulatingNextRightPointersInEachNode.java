@@ -57,7 +57,6 @@ package leetcode.editor.en;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * id: 116
@@ -98,36 +97,22 @@ class Solution {
     public Node connect(Node root) {
         if(root!=null){
             levelTravel(root,1);
-            connect(root,1);
         }
         return root;
     }
 
-    /**
-     * 用於連接節點
-     * @param node
-     * @param level
-     */
-    void connect(Node node,int level){
-        if(node!=null){
-            map.get(level).poll();
-            node.next = map.get(level).peek();
-            connect(node.left,level+1);
-            connect(node.right,level+1);
-        }
-    }
-
-    /**
-     * 先走過一遍紀錄每層節點關係
-     * @param node
-     * @param level
-     */
     void levelTravel(Node node,int level){
         if(node != null){
-            if(map.get(level)==null){
-                map.put(level,new LinkedList<>());
+            LinkedList<Node> list = map.get(level);
+            if(list==null){
+                list = new LinkedList<>();
+                map.put(level,list);
             }
-            map.get(level).offer(node);
+            // 連結節點
+            if(!list.isEmpty()){
+                list.poll().next= node;
+            }
+            list.offer(node);
             levelTravel(node.left,level+1);
             levelTravel(node.right,level+1);
         }
