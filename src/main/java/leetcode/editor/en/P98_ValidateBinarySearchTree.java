@@ -69,34 +69,26 @@ public class P98_ValidateBinarySearchTree{
  * }
  */
 class Solution {
-    int val;
+    List<Integer> list = new ArrayList<>();
+    Boolean valid = true;
     public boolean isValidBST(TreeNode root) {
-        val = root.val;
-        return validL(root.left)&&validR(root.right);
+        inorderValid(root);
+        return valid;
     }
-    boolean validL(TreeNode root){
-        if(root==null) return true;
-        if(root.val>=val)return false;
-        if(root.left==null&&root.right==null) return true;
-        if(root.left!=null&&root.right!=null)
-            return root.val > root.left.val  &&
-                    root.val < root.right.val &&
-                    validL(root.left) && validL(root.right);
-        return root.left==null
-                ? root.val < root.right.val && validL(root.right)
-                : root.val > root.left.val && validL(root.left);
-    }
-    boolean validR(TreeNode root){
-        if(root==null) return true;
-        if(root.val<=val)return false;
-        if(root.left==null&&root.right==null) return true;
-        if(root.left!=null&&root.right!=null)
-            return root.val > root.left.val  &&
-                    root.val < root.right.val &&
-                    validR(root.left) && validR(root.right);
-        return root.left==null
-                ? root.val < root.right.val && validR(root.right)
-                : root.val > root.left.val && validR(root.left);
+    void inorderValid(TreeNode node){
+        // 使用inorder比對資料,發現前面已經有不合格節點,則不用繼續驗證
+        if(node != null && valid==true) {
+            isValidBST(node.left);
+            // 加入前驗證資料
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i) >= node.val){
+                    valid = false;
+                    break;
+                }
+            }
+            list.add(node.val);
+            isValidBST(node.right);
+        }
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -18,7 +18,7 @@ public class P98_ValidateBinarySearchTree_Test {
     }
     @Test
     public void ex2(){
-        TreeNode input = new TreeNode(5,new TreeNode(1),new TreeNode(4,new TreeNode(3),new TreeNode(6)));
+        TreeNode input = new TreeNode(5,new TreeNode(1,null,null),new TreeNode(4,new TreeNode(3),new TreeNode(6)));
         Assert.assertFalse(solution.isValidBST(input));
     }
     @Test
