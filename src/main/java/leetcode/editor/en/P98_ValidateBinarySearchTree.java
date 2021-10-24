@@ -41,6 +41,7 @@ package leetcode.editor.en;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * id: 98
@@ -69,7 +70,7 @@ public class P98_ValidateBinarySearchTree{
  * }
  */
 class Solution {
-    List<Integer> list = new ArrayList<>();
+    Stack<Integer> stack = new Stack<>();
     Boolean valid = true;
     public boolean isValidBST(TreeNode root) {
         inorderValid(root);
@@ -79,14 +80,10 @@ class Solution {
         // 使用inorder比對資料,發現前面已經有不合格節點,則不用繼續驗證
         if(node != null && valid==true) {
             isValidBST(node.left);
-            // 加入前驗證資料
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i) >= node.val){
-                    valid = false;
-                    break;
-                }
-            }
-            list.add(node.val);
+            // 加入前驗證資料,改用stack避免迴圈效能消耗
+            if (!stack.isEmpty() && stack.peek() >= node.val)
+                valid = false;
+            stack.add(node.val);
             isValidBST(node.right);
         }
     }
