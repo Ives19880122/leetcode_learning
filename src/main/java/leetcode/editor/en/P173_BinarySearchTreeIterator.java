@@ -62,10 +62,7 @@
     
 package leetcode.editor.en;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * id: 173
@@ -94,28 +91,26 @@ public class P173_BinarySearchTreeIterator{
  * }
  */
 class BSTIterator {
-    Stack <Integer> stack;
-    Iterator<Integer> que;
+    List<Integer> list;
+    int idx = 0;
     public BSTIterator(TreeNode root) {
-       this.stack = new Stack<>();
-       helper(root);
-       que = stack.iterator();
+       this.list = new ArrayList<>();
+       dfs(root);
     }
 
-    void helper(TreeNode node){
-        if(node!=null){
-            helper(node.left);
-            stack.add(node.val);
-            helper(node.right);
-        }
+    void dfs(TreeNode node){
+        if(node==null) return;
+            dfs(node.left);
+            list.add(node.val);
+            dfs(node.right);
     }
     
     public int next() {
-       return que.next();
+       return list.get(idx++);
     }
     
     public boolean hasNext() {
-        return que.hasNext();
+        return idx<list.size();
     }
 }
 
