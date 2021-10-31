@@ -65,13 +65,12 @@ class Solution {
     Stack<Integer> stack = new Stack<>();
     public ListNode reverseList(ListNode head) {
         setStack(head);
-        ListNode n = new ListNode(0);
-        ListNode tmp = n;
+        ListNode tmp = head;
         while(!stack.empty()){
-            tmp.next = new ListNode(stack.pop());
+            tmp.val = stack.pop();
             tmp = tmp.next;
         }
-        return n.next;
+        return head;
     }
     void setStack(ListNode node){
         if(node == null)return;
