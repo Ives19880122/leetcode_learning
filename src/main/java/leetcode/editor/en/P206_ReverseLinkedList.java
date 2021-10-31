@@ -62,20 +62,31 @@ public class P206_ReverseLinkedList{
  * }
  */
 class Solution {
-    Stack<Integer> stack = new Stack<>();
     public ListNode reverseList(ListNode head) {
-        setStack(head);
-        ListNode tmp = head;
-        while(!stack.empty()){
-            tmp.val = stack.pop();
-            tmp = tmp.next;
+        ListNode cur = head;
+        // 負責交換與暫存狀態
+        ListNode pre = null;
+        while(cur!=null){
+            // 備份next
+            ListNode tmp = cur.next;
+            // 交換
+            cur.next = pre;
+            pre = cur;
+            // 更新
+            cur = tmp;
+            // 1,2,3,4,5
+            // step 1
+            // 2, next=null, 1 null, 2
+            // step 2
+            // 3, next=1 null, 2 1 null, 3
+            // step 3
+            // 4, next=2 1 null, 3 2 1 null, 4
+            // step 4
+            // 5, next=3 2 1 null, 4 3 2 1 null, 5
+            // step 5
+            // null, next=4 3 2 1 null, 5 4 3 2 1 null, null
         }
-        return head;
-    }
-    void setStack(ListNode node){
-        if(node == null)return;
-        stack.push(node.val);
-        setStack(node.next);
+        return pre;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
