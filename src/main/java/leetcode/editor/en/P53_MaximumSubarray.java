@@ -60,7 +60,7 @@ class Solution {
         dp[0] = nums[0];
         int res = dp[0];
         for(int i = 1; i<n; i++){
-            // 前一陣列,若小於零則回傳自己
+            // 前一陣列,若小於零則回傳自己(不疊加)
             dp[i] = nums[i] + (dp[i-1] > 0 ? dp[i-1] : 0);
             res = Math.max(res,dp[i]);
         }
