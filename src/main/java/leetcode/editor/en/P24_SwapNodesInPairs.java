@@ -35,7 +35,9 @@
     
 package leetcode.editor.en;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * id: 24
@@ -59,17 +61,28 @@ public class P24_SwapNodesInPairs{
  * }
  */
 class Solution {
+    int tmp;
     public ListNode swapPairs(ListNode head) {
-        return helper(head);
+        return helper(head,0);
     }
-    ListNode helper(ListNode node){
-        if(node == null) {
+    ListNode helper(ListNode node, int i){
+        if(node==null){
             return null;
+        }else if(node.next==null){
+            if(i%2==1) {
+                node.val = tmp;
+            }
+            return node;
         }else{
-            int val = node.next.val;
-            node = node.next;
-            node.next = node.next.next;
-            return new ListNode(val,helper(node));
+            if(i%2==0){
+                tmp=node.val;
+                node.val=node.next.val;
+            }
+            if(i%2==1){
+                node.val=tmp;
+            }
+            node.next = helper(node.next,i+1);
+            return node;
         }
     }
 }
