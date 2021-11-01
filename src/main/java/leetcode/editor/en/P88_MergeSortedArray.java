@@ -56,7 +56,10 @@
 // Related Topics Array Two Pointers Sorting 👍 1657 👎 180
     
 package leetcode.editor.en;
-/** 
+
+import java.util.PriorityQueue;
+
+/**
  * id: 88
  * title: Merge Sorted Array
  * author: Ives.He 
@@ -69,29 +72,17 @@ public class P88_MergeSortedArray{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        int left = 0;
-        int right = 0;
-        int[] tmp = new int[m];
-        int idx = 0;
-        // avoid out of index
-        while(idx<nums1.length){
-            // save num1 to tmp
-            if(idx<m){
-                tmp[idx] = nums1[idx];
-            }
-            if(left < m && right < n){
-                if(tmp[left] == nums2[right]){
-                    nums1[idx++] = tmp[left++];
-                }else if(tmp[left] > nums2[right]){
-                    nums1[idx++] =  nums2[right++];
-                }else if(tmp[left]<nums2[right]){
-                    nums1[idx++] = tmp[left++];
-                }
-            }else if(left < m){
-                nums1[idx++] = tmp[left++];
-            }else if(right < n){
-                nums1[idx++] =  nums2[right++];
-            }
+        PriorityQueue<Integer> min = new PriorityQueue<>();
+        int i = 0;
+        while(i<m||i<n){
+            if(i<m) min.add(nums1[i]);
+            if(i<n) min.add(nums2[i]);
+            i++;
+        }
+        i = 0;
+        while(i<nums1.length){
+            nums1[i] = min.poll();
+            i++;
         }
     }
 }
