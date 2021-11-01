@@ -93,7 +93,7 @@ class KthLargest {
        * @return
        */
       private Integer peek(){
-          if(list.size()==0)return null;
+          if(list.size()==0) return null;
           return list.get(0);
       }
 
