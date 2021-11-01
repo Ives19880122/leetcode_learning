@@ -57,7 +57,8 @@
     
 package leetcode.editor.en;
 
-import java.util.PriorityQueue;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * id: 88
@@ -72,17 +73,28 @@ public class P88_MergeSortedArray{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        PriorityQueue<Integer> min = new PriorityQueue<>();
+        Queue<Integer> que1 = new LinkedList<>();
+        Queue<Integer> que2 = new LinkedList<>();
         int i = 0;
-        while(i<m||i<n){
-            if(i<m) min.add(nums1[i]);
-            if(i<n) min.add(nums2[i]);
+        while(i<n||i<m){
+            if(i<m) que1.add(nums1[i]);
+            if(i<n) que2.add(nums2[i]);
             i++;
         }
         i = 0;
-        while(i<nums1.length){
-            nums1[i] = min.poll();
-            i++;
+        while(!que1.isEmpty()||!que2.isEmpty()){
+            if(!que1.isEmpty()&&!que2.isEmpty()){
+                if(que1.peek()>que2.peek()){
+                    nums1[i++] = que2.poll();
+                }else if(que1.peek()<que2.peek()){
+                    nums1[i++] = que1.poll();
+                }else{
+                    nums1[i++] = que1.poll();
+                    nums1[i++] = que2.poll();
+                }
+            }else{
+                nums1[i++] = !que1.isEmpty() ? que1.poll() : que2.poll();
+            }
         }
     }
 }
