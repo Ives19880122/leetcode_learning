@@ -48,6 +48,7 @@ package leetcode.editor.en;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 /**
@@ -64,24 +65,29 @@ public class P789_KthLargestElementInAStream{
   //leetcode submit region begin(Prohibit modification and deletion)
 class KthLargest {
       int n;
-      List<Integer> list;
+      PriorityQueue<Integer> min;
       public KthLargest(int k, int[] nums) {
-          this.n = k-1;
-          this.list = Arrays.stream(nums)
-                  .boxed()
-                  .collect(Collectors.toList());
+          this.n = k;
+          this.min = new PriorityQueue<>();
+          for(int val : nums){
+              setQueue(val);
+          }
       }
 
       public int add(int val) {
-          this.list.add(val);
-          sorted();
-          return list.get(n);
+          setQueue(val);
+          return min.peek();
       }
 
-      void sorted(){
-          this.list = list.stream()
-                  .sorted((x,y)-> -x.compareTo(y))
-                  .collect(Collectors.toList());
+      void setQueue(int val){
+          if(min.size()<n){
+              min.add(val);
+          }else{
+              if(min.peek()<val){
+                  min.poll();
+                  min.add(val);
+              }
+          }
       }
 }
 
