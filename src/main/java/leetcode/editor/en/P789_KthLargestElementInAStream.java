@@ -46,10 +46,8 @@
 
 package leetcode.editor.en;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.stream.Collectors;
 
 /**
   * id：789
@@ -65,10 +63,10 @@ public class P789_KthLargestElementInAStream{
   //leetcode submit region begin(Prohibit modification and deletion)
 class KthLargest {
       int n;
-      PriorityQueue<Integer> min;
+      List<Integer> list;
       public KthLargest(int k, int[] nums) {
           this.n = k;
-          this.min = new PriorityQueue<>();
+          this.list = new ArrayList();
           for(int val : nums){
               setQueue(val);
           }
@@ -76,18 +74,99 @@ class KthLargest {
 
       public int add(int val) {
           setQueue(val);
-          return min.peek();
+          return peek();
       }
 
       void setQueue(int val){
-          if(min.size()<n){
-              min.add(val);
+          if(list.size()<n){
+              offer(val);
           }else{
-              if(min.peek()<val){
-                  min.poll();
-                  min.add(val);
+              if(peek()<val){
+                  poll();
+                  offer(val);
               }
           }
+      }
+
+      /**
+       * 取得最上面一筆資料
+       * @return
+       */
+      private Integer peek(){
+          if(list.size()==0)return null;
+          return list.get(0);
+      }
+
+      /**
+       * 比較根節點與子節點大小
+       * @param root
+       * @param child
+       * @return
+       */
+      private int compare(int root, int child){
+          return root > child ? 1 : -1;
+      }
+
+      /**
+       * 加入資料
+       * @param val
+       * @return
+       */
+      private boolean offer(int val){
+          list.add(val);
+          int child = list.size()-1;
+          int parent = (child-1)/2;
+          // Re heap 重新排列
+          while(parent>=0 && compare(list.get(parent),list.get(child))>0){
+              swap(parent,child);
+              child = parent;
+              parent = (child-1)/2;
+          }
+          return true;
+      }
+
+      /**
+       * 取出資料
+       * @return
+       */
+      private Integer poll(){
+          if(list.size()==0)return null;
+          int result = list.get(0);
+          if(list.size()==1){
+              list.remove(0);
+              return result;
+          }
+          // 將最後一筆取到最前面進行重新排列
+          list.set(0,list.remove(n-1));
+          int parent = 0;
+          while(true){
+              int left = 2 * parent + 1;
+              if(left>= list.size()) break;
+              int right = left + 1;
+              int min = left;
+              if(right<list.size()&&compare(list.get(left),list.get(right))>0){
+                  min = right;
+              }
+              // 與parent比較如果較小就要交換
+              if(compare(list.get(parent),list.get(min))>0){
+                  swap(parent,min);
+                  parent = min;
+              }else {
+                  break;
+              }
+          }
+          return result;
+      }
+
+      /**
+       * 資料交換
+       * @param parent
+       * @param child
+       */
+      private void swap (int parent, int child){
+          int tmp = list.get(parent);
+          list.set(parent,list.get(child));
+          list.set(child,tmp);
       }
 }
 
