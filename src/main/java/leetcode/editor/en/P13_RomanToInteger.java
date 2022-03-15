@@ -79,22 +79,15 @@
     
 package leetcode.editor.en;
 
-import netscape.javascript.JSObject;
-
 import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-import java.util.stream.IntStream;
 
 /**
  * @author  Ives.He 
  * @date    2021-10-04 00:25:31 
  */
-public class RomanToInteger{    
+public class P13_RomanToInteger {
     public static void main(String[] args) {
-        Solution solution = new RomanToInteger().new Solution();    
+        Solution solution = new P13_RomanToInteger().new Solution();
     }    
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {

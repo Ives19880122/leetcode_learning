@@ -54,6 +54,8 @@
     
 package leetcode.editor.en;
 
+import leetcode.util.Node;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;

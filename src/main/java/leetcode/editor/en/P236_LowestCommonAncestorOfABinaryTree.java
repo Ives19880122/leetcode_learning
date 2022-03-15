@@ -44,8 +44,7 @@
     
 package leetcode.editor.en;
 
-import java.util.ArrayList;
-import java.util.List;
+import leetcode.util.TreeNode;
 
 /**
  * id: 236

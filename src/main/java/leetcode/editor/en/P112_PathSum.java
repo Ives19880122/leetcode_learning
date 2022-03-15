@@ -37,7 +37,10 @@
 // Related Topics Tree Depth-First Search Binary Tree 👍 4159 👎 694
     
 package leetcode.editor.en;
-/** 
+
+import leetcode.util.TreeNode;
+
+/**
  * id: 112
  * title: Path Sum
  * author: Ives.He 

@@ -49,9 +49,9 @@ package leetcode.editor.en;
  * @author  Ives.He 
  * @date    2021-10-03 21:22:18 
  */
-public class TwoSum{    
+public class P1_TwoSum {
     public static void main(String[] args) {
-        Solution solution = new TwoSum().new Solution();
+        Solution solution = new P1_TwoSum().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {

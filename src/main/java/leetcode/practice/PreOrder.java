@@ -1,4 +1,6 @@
-package leetcode.editor.en;
+package leetcode.practice;
+
+import leetcode.util.TreeNode;
 
 import java.util.LinkedList;
 import java.util.Queue;

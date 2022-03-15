@@ -27,7 +27,10 @@
 // Related Topics Linked List 👍 3426 👎 162
     
 package leetcode.editor.en;
-/** 
+
+import leetcode.util.ListNode;
+
+/**
  * id: 83
  * title: Remove Duplicates from Sorted List
  * author: Ives.He 

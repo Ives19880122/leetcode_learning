@@ -51,9 +51,9 @@ package leetcode.editor.en;
  * @author  Ives.He 
  * @date    2021-10-04 00:17:58 
  */
-public class PalindromeNumber{    
+public class P9_PalindromeNumber {
     public static void main(String[] args) {
-        Solution solution = new PalindromeNumber().new Solution();    
+        Solution solution = new P9_PalindromeNumber().new Solution();
     }    
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {

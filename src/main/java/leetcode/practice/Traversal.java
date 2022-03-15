@@ -1,4 +1,6 @@
-package leetcode.editor.en;
+package leetcode.practice;
+
+import leetcode.util.TreeNode;
 
 /**
  * for Binary Tree Test input/out 使用工具類別

@@ -1,6 +1,7 @@
 package leetcode.editor.en;
 
 import leetcode.editor.en.P101_SymmetricTree.Solution;
+import leetcode.util.TreeNode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -35,9 +35,7 @@
     
 package leetcode.editor.en;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import leetcode.util.ListNode;
 
 /**
  * id: 24

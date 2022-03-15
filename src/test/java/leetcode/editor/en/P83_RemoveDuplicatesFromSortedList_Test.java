@@ -1,6 +1,7 @@
 package leetcode.editor.en;
 
 import leetcode.editor.en.P83_RemoveDuplicatesFromSortedList.Solution;
+import leetcode.util.ListNode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

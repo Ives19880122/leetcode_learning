@@ -1,4 +1,6 @@
-package leetcode.editor.en;
+package leetcode.practice;
+
+import leetcode.util.TreeNode;
 
 /**
  * left -> center -> right

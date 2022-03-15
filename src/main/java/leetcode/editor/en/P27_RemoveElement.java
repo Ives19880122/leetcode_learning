@@ -1,6 +1,5 @@
-//Given an integer array nums sorted in non-decreasing order, remove the 
-//duplicates in-place such that each unique element appears only once. The relative 
-//order of the elements should be kept the same. 
+//Given an integer array nums and an integer val, remove all occurrences of val 
+//in nums in-place. The relative order of the elements may be changed. 
 //
 // Since it is impossible to change the length of the array in some languages, 
 //you must instead have the result be placed in the first part of the array nums. 
@@ -19,12 +18,15 @@
 //
 // 
 //int[] nums = [...]; // Input array
-//int[] expectedNums = [...]; // The expected answer with correct length
+//int val = ...; // Value to remove
+//int[] expectedNums = [...]; // The expected answer with correct length.
+//                            // It is sorted with no values equaling val.
 //
-//int k = removeDuplicates(nums); // Calls your implementation
+//int k = removeElement(nums, val); // Calls your implementation
 //
 //assert k == expectedNums.length;
-//for (int i = 0; i < k; i++) {
+//sort(nums, 0, k); // Sort the first k elements of nums
+//for (int i = 0; i < actualLength; i++) {
 //    assert nums[i] == expectedNums[i];
 //}
 // 
@@ -35,10 +37,10 @@
 // Example 1: 
 //
 // 
-//Input: nums = [1,1,2]
-//Output: 2, nums = [1,2,_]
+//Input: nums = [3,2,2,3], val = 3
+//Output: 2, nums = [2,2,_,_]
 //Explanation: Your function should return k = 2, with the first two elements 
-//of nums being 1 and 2 respectively.
+//of nums being 2.
 //It does not matter what you leave beyond the returned k (hence they are 
 //underscores).
 // 
@@ -46,10 +48,11 @@
 // Example 2: 
 //
 // 
-//Input: nums = [0,0,1,1,1,2,2,3,3,4]
-//Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
+//Input: nums = [0,1,2,2,3,0,4,2], val = 2
+//Output: 5, nums = [0,1,4,0,3,_,_,_]
 //Explanation: Your function should return k = 5, with the first five elements 
-//of nums being 0, 1, 2, 3, and 4 respectively.
+//of nums containing 0, 0, 1, 3, and 4.
+//Note that the five elements can be returned in any order.
 //It does not matter what you leave beyond the returned k (hence they are 
 //underscores).
 // 
@@ -58,44 +61,32 @@
 // Constraints: 
 //
 // 
-// 0 <= nums.length <= 3 * 10⁴ 
-// -100 <= nums[i] <= 100 
-// nums is sorted in non-decreasing order. 
+// 0 <= nums.length <= 100 
+// 0 <= nums[i] <= 50 
+// 0 <= val <= 100 
 // 
-// Related Topics Array Two Pointers 👍 4874 👎 8215
+// Related Topics Array Two Pointers 👍 2646 👎 4160
     
 package leetcode.editor.en;
 /** 
  * @author  Ives.He 
- * @date    2021-10-04 22:14:42 
+ * @date    2021-10-04 23:44:43 
  */
-public class RemoveDuplicatesFromSortedArray{    
+public class P27_RemoveElement {
     public static void main(String[] args) {
-        Solution solution = new RemoveDuplicatesFromSortedArray().new Solution();    
-    }    
+        Solution solution = new P27_RemoveElement().new Solution();
+    }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-    public int removeDuplicates(int[] nums) {
-         // 參考寫法
-        int n = nums.length;
-        if(n<=1){
-            return 1;
-        }
-        int left = 0;
-        int right = 1;
-        while(right <= n-1){
-            // 如果相等時,往右移一格
-            if (nums[right] == nums[left]) {
-                right++;
-            // 不相等表示,left可以新增一位數,並把左右idx往前移動
-            }else{
-                nums[left+1] = nums[right];
-                right++;
-                left++;
+    public int removeElement(int[] nums, int val) {
+        int cur = 0;
+        for(int i=0; i<nums.length; i++){
+            if(nums[i] != val){
+                nums[cur] = nums[i];
+                cur++;
             }
         }
-        // idx+1才是真正的長度個數
-        return left+1;
+        return cur;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)

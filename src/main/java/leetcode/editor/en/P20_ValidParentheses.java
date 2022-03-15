@@ -55,8 +55,6 @@
 
 package leetcode.editor.en;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -66,9 +64,9 @@ import java.util.Stack;
   * date：2021-10-07 12:47:01
   * version2 : char
 */
-public class ValidParentheses {
+public class P20_ValidParentheses {
     public static void main(String[] args) {
-        Solution solution = new ValidParentheses().new Solution();
+        Solution solution = new P20_ValidParentheses().new Solution();
         System.out.println("Hello world");
     }
     //leetcode submit region begin(Prohibit modification and deletion)

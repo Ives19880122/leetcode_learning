@@ -34,13 +34,16 @@
 // Related Topics Linked List Recursion 👍 8588 👎 873
     
 package leetcode.editor.en;
-/** 
+
+import leetcode.util.ListNode;
+
+/**
  * @author  Ives.He 
  * @date    2021-10-05 23:09:20 
  */
-public class MergeTwoSortedLists{    
+public class P21_MergeTwoSortedLists {
     public static void main(String[] args) {
-        Solution solution = new MergeTwoSortedLists().new Solution();    
+        Solution solution = new P21_MergeTwoSortedLists().new Solution();
     }    
     //leetcode submit region begin(Prohibit modification and deletion)
 /**

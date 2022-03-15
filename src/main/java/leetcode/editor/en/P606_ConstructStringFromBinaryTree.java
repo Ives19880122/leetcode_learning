@@ -34,7 +34,10 @@
 // Related Topics String Tree Depth-First Search Binary Tree 👍 1161 👎 1523
     
 package leetcode.editor.en;
-/** 
+
+import leetcode.util.TreeNode;
+
+/**
  * id: 606
  * title: Construct String from Binary Tree
  * author: Ives.He 

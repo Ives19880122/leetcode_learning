@@ -132,16 +132,13 @@
 package leetcode.editor.en;
 
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * @author  Ives.He 
  * @date    2021-10-04 02:21:26 
  */
-public class StringToIntegerAtoi{    
+public class P8_StringToIntegerAtoi {
     public static void main(String[] args) {
-        Solution solution = new StringToIntegerAtoi().new Solution();    
+        Solution solution = new P8_StringToIntegerAtoi().new Solution();
     }    
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {

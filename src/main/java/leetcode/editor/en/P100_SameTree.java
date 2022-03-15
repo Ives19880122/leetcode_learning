@@ -38,7 +38,7 @@
     
 package leetcode.editor.en;
 
-import java.util.Stack;
+import leetcode.util.TreeNode;
 
 /**
  * id: 100

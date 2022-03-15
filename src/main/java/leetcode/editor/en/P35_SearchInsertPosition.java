@@ -39,9 +39,9 @@ package leetcode.editor.en;
   * author: Ives.He
   * date：2021-10-06 12:26:54
 */
-public class SearchInsertPosition {
+public class P35_SearchInsertPosition {
     public static void main(String[] args) {
-        Solution solution = new SearchInsertPosition().new Solution();
+        Solution solution = new P35_SearchInsertPosition().new Solution();
     }
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {

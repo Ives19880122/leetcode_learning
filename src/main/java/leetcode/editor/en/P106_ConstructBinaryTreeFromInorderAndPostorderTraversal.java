@@ -34,6 +34,8 @@
     
 package leetcode.editor.en;
 
+import leetcode.util.TreeNode;
+
 import java.util.*;
 
 /**

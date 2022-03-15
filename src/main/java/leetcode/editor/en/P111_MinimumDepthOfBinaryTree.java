@@ -31,7 +31,10 @@
 //67 👎 882
     
 package leetcode.editor.en;
-/** 
+
+import leetcode.util.TreeNode;
+
+/**
  * id: 111
  * title: Minimum Depth of Binary Tree
  * author: Ives.He 

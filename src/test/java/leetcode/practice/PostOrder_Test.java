@@ -1,5 +1,6 @@
-package leetcode.editor.en;
+package leetcode.practice;
 
+import leetcode.util.TreeNode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

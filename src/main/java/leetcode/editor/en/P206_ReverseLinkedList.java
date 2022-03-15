@@ -38,7 +38,7 @@
     
 package leetcode.editor.en;
 
-import java.util.Stack;
+import leetcode.util.ListNode;
 
 /**
  * id: 206

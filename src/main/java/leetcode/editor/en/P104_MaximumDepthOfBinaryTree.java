@@ -44,8 +44,7 @@
     
 package leetcode.editor.en;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import leetcode.util.TreeNode;
 
 /**
  * id: 104

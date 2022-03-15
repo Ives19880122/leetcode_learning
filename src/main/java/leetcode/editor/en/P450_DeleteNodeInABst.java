@@ -53,7 +53,10 @@
 // Related Topics Tree Binary Search Tree Binary Tree 👍 3874 👎 127
     
 package leetcode.editor.en;
-/** 
+
+import leetcode.util.TreeNode;
+
+/**
  * id: 450
  * title: Delete Node in a BST
  * author: Ives.He 

@@ -42,7 +42,10 @@
 // Related Topics Tree Binary Search Tree Binary Tree 👍 2067 👎 108
     
 package leetcode.editor.en;
-/** 
+
+import leetcode.util.TreeNode;
+
+/**
  * id: 701
  * title: Insert into a Binary Search Tree
  * author: Ives.He 

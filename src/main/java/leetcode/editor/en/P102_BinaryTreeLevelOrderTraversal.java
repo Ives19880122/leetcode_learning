@@ -34,10 +34,11 @@
 
 package leetcode.editor.en;
 
+import leetcode.util.TreeNode;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 /**
   * id：102

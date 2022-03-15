@@ -1,6 +1,7 @@
 package leetcode.editor.en;
 
 import leetcode.editor.en.P24_SwapNodesInPairs.Solution;
+import leetcode.util.ListNode;
 import org.junit.Before;
 import org.junit.Test;
 

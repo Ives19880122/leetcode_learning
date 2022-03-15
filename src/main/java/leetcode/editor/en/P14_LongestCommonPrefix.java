@@ -37,9 +37,9 @@ import java.util.Arrays;
  * @author  Ives.He 
  * @date    2021-10-05 00:24:48 
  */
-public class LongestCommonPrefix{    
+public class P14_LongestCommonPrefix {
     public static void main(String[] args) {
-        Solution solution = new LongestCommonPrefix().new Solution();    
+        Solution solution = new P14_LongestCommonPrefix().new Solution();
     }    
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {

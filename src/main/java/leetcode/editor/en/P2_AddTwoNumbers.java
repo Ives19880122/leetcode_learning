@@ -40,13 +40,16 @@
 // Related Topics Linked List Math Recursion 👍 14164 👎 3146
     
 package leetcode.editor.en;
-/** 
+
+import leetcode.util.ListNode;
+
+/**
  * @author  Ives.He 
  * @date    2021-10-04 22:54:14 
  */
-public class AddTwoNumbers{    
+public class P2_AddTwoNumbers {
     public static void main(String[] args) {
-        Solution solution = new AddTwoNumbers().new Solution();    
+        Solution solution = new P2_AddTwoNumbers().new Solution();
     }    
     //leetcode submit region begin(Prohibit modification and deletion)
 /**

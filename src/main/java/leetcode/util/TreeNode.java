@@ -1,4 +1,4 @@
-package leetcode.editor.en;
+package leetcode.util;
 
 /**
  * 根據leetcode建立參考類別
