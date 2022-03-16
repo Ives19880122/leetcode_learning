@@ -4,6 +4,7 @@ import leetcode.util.TreeNode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import other.PostOrder;
 
 public class PostOrder_Test {
     PostOrder postOrder;

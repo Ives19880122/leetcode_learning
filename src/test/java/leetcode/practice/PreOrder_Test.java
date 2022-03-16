@@ -4,6 +4,7 @@ import leetcode.util.TreeNode;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import other.PreOrder;
 
 public class PreOrder_Test {
     PreOrder preOrder;
