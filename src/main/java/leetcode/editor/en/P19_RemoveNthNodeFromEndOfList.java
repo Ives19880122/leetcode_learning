@@ -66,41 +66,22 @@ public class P19_RemoveNthNodeFromEndOfList{
  */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        // 題目: 移除倒數第n個node
-        // 1.遍歷取得所有資料
-        // 2.找到倒數n個節點
-        // 3.移除
-        // 倒數第n個表示ListNode最大長度為n
-        // size-n = 0 , size-n = 1 , size-n = 2
-        Stack<Integer> stack = new Stack();
-        ListNode tmp = head;
-        while(tmp!=null){
-            stack.push(tmp.val);
-            tmp = tmp.next;
+        // 參考網路建議使用快慢指標
+        ListNode node = new ListNode(0, head);
+        ListNode slow = node;
+        ListNode fast = head;
+        // 1.讓fast先走n步
+        for(int i=0; i<n; i++){
+            fast = fast.next;
         }
-        Stack<Integer> stack2 = new Stack();
-        int pick = 0;
-        // 移除節點
-        while (!stack.isEmpty()){
-            pick++;
-            int d = stack.pop();
-            if(pick!=n) stack2.add(d);
+        // 2.讓fast,slow同時前進,fast為null時踩到終點
+        while(fast!=null){
+            fast = fast.next;
+            slow = slow.next;
         }
-        // 重整
-        if(stack2.isEmpty()){
-            return null;
-        }else{
-            ListNode node = new ListNode();
-            ListNode tm = node;
-            while (!stack2.isEmpty()){
-                tm.val = stack2.pop();
-                if(!stack2.isEmpty()){
-                    tm.next = new ListNode();
-                    tm = tm.next;
-                }
-            }
-            return node;
-        }
+        // 3.移除結束位置的資料
+        slow.next = slow.next.next;
+        return node.next;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
