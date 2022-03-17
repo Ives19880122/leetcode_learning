@@ -63,22 +63,19 @@ public class P206_ReverseLinkedList{
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        // 遞迴研究
-        // 要交換, 可以另外overload一個方法
-        return reverseList(head,null);
-    }
-
-    public ListNode reverseList(ListNode head, ListNode exchanged) {
-        // 4. 如果資料為空,表示交換結束
-        if(head == null){
-            return exchanged;
+        // while寫法
+        ListNode node = null;
+        while(head!=null){
+            // 1. 備份後續連結
+            ListNode next = head.next;
+            // 2. 切離head
+            head.next = node;
+            // 3. 把head元素變成node的頭
+            node = head;
+            // 4. 置換head
+            head = next;
         }
-        // 1. 切掉頭端
-        ListNode next = head.next;
-        // 2. head與新連結串接
-        head.next = exchanged;
-        // 3. 遞迴繼續進行交換
-        return reverseList(next,head);
+        return node;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
