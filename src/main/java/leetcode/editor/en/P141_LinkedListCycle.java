@@ -83,11 +83,12 @@ public class P141_LinkedListCycle{
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        // 解2 參考使用set解 類似map
-        Set<Integer> set = new HashSet<>();
+        // 解3 使用極值當作邊界
+        int max = Integer.MAX_VALUE;
         while(head != null){
-            if(set.contains(head.hashCode())) return true;
-            set.add(head.hashCode());
+            if(head.val == max) return true;
+            // 解題範圍內,val不會等於max,所以一但發生max存在,就是存在環
+            head.val = max;
             head = head.next;
         }
         return false;
