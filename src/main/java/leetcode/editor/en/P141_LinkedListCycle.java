@@ -54,7 +54,9 @@ package leetcode.editor.en;
 import leetcode.util.ListNode;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
   * id：141
@@ -81,10 +83,11 @@ public class P141_LinkedListCycle{
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        Map<Integer,Integer> map = new HashMap<>();
+        // 解2 參考使用set解 類似map
+        Set<Integer> set = new HashSet<>();
         while(head != null){
-            if(map.containsKey(head.hashCode())) return true;
-            map.put(head.hashCode(),0);
+            if(set.contains(head.hashCode())) return true;
+            set.add(head.hashCode());
             head = head.next;
         }
         return false;
