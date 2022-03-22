@@ -83,13 +83,15 @@ public class P141_LinkedListCycle{
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        // 解3 使用極值當作邊界
-        int max = Integer.MAX_VALUE;
-        while(head != null){
-            if(head.val == max) return true;
-            // 解題範圍內,val不會等於max,所以一但發生max存在,就是存在環
-            head.val = max;
-            head = head.next;
+        // 解4 使用快慢指標解題
+        if(head == null) return false;
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast.next != null && fast.next.next != null){
+            // 快的一定比慢的早一步,如果踩到環,就會後來居上與slow並行
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow) return true;
         }
         return false;
     }
