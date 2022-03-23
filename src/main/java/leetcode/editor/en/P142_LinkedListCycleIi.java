@@ -81,10 +81,11 @@ public class P142_LinkedListCycleIi{
  */
 public class Solution {
     public ListNode detectCycle(ListNode head) {
-        Set<Integer> set = new HashSet<>();
+        //改用極值法
+        int max = Integer.MAX_VALUE;
         while(head!=null){
-            if(set.contains(head.hashCode())) return head;
-            set.add(head.hashCode());
+            if(head.val == max) return head;
+            head.val = max;
             head = head.next;
         }
         return null;
