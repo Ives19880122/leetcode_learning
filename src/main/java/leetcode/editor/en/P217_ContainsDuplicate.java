@@ -23,8 +23,8 @@
     
 package leetcode.editor.en;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * id: 217
@@ -40,12 +40,12 @@ public class P217_ContainsDuplicate{
 class Solution {
     public boolean containsDuplicate(int[] nums) {
         int i = 0;
-        Map<Integer,Integer> tmp = new HashMap<>();
+        Set<Integer> tmp = new HashSet<>();
         while(i<nums.length){
-            if(tmp.containsKey(nums[i])){
+            if(tmp.contains(nums[i])){
                 return true;
             }
-            tmp.put(nums[i],0);
+            tmp.add(nums[i]);
             i++;
         }
         return false;
