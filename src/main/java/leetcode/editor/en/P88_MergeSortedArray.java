@@ -73,28 +73,18 @@ public class P88_MergeSortedArray{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        Queue<Integer> que1 = new LinkedList<>();
-        Queue<Integer> que2 = new LinkedList<>();
-        int i = 0;
-        while(i<n||i<m){
-            if(i<m) que1.add(nums1[i]);
-            if(i<n) que2.add(nums2[i]);
-            i++;
+        // 改寫倒過來排
+        int finished = m + n - 1;
+        int tail1 = m - 1;
+        int tail2 = n - 1;
+        while (tail1>=0 && tail2>=0){
+            nums1[finished--] = nums1[tail1] > nums2[tail2]
+                    ? nums1[tail1--]
+                    : nums2[tail2--];
         }
-        i = 0;
-        while(!que1.isEmpty()||!que2.isEmpty()){
-            if(!que1.isEmpty()&&!que2.isEmpty()){
-                if(que1.peek()>que2.peek()){
-                    nums1[i++] = que2.poll();
-                }else if(que1.peek()<que2.peek()){
-                    nums1[i++] = que1.poll();
-                }else{
-                    nums1[i++] = que1.poll();
-                    nums1[i++] = que2.poll();
-                }
-            }else{
-                nums1[i++] = !que1.isEmpty() ? que1.poll() : que2.poll();
-            }
+        // 消耗剩餘到 nums2(如果nums1都比較大的時候)
+        while (tail2>=0){
+            nums1[finished--] = nums2[tail2--];
         }
     }
 }
