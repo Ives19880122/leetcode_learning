@@ -54,10 +54,13 @@ class Solution {
         int min = prices[0];
         int maxProfit = 0;
         for(int i = 1; i<prices.length; i++){
-            // 如果小於現況值,則取代最小值
-            min = Math.min(prices[i],min);
-            // 計算利差,如果大於現況,則將獲利結果取代
-            maxProfit = Math.max(maxProfit,prices[i]-min);
+            if(min-prices[i]>0){
+                // 如果小於現況值,則取代最小值
+                min = prices[i];
+            }else if(prices[i]-min>maxProfit){
+                // 計算利差,如果大於現況,則將獲利結果取代
+                maxProfit = prices[i]-min;
+            }
         }
         return maxProfit;
     }
