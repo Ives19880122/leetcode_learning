@@ -51,15 +51,16 @@ public class P121_BestTimeToBuyAndSellStock{
 class Solution {
     public int maxProfit(int[] prices) {
         // 起始值
-        int min = prices[0];
+        int min = Integer.MAX_VALUE;
         int maxProfit = 0;
-        for(int i = 1; i<prices.length; i++){
-            if(min-prices[i]>0){
+        // 改用for loop,不用int
+        for(int price : prices){
+            if(min-price>0){
                 // 如果小於現況值,則取代最小值
-                min = prices[i];
-            }else if(prices[i]-min>maxProfit){
+                min = price;
+            }else if(price-min>maxProfit){
                 // 計算利差,如果大於現況,則將獲利結果取代
-                maxProfit = prices[i]-min;
+                maxProfit = price-min;
             }
         }
         return maxProfit;
