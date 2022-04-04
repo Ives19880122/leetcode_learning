@@ -114,31 +114,17 @@ public class P160_IntersectionOfTwoLinkedLists{
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        // 參考解
         if(headA==null || headB==null) return null;
         ListNode tmp1 = headA;
         ListNode tmp2 = headB;
-        while(tmp1!=null || tmp2!=null){
-            if(tmp1==null){
-                headB = headB.next;
-                tmp2 = tmp2.next;
-            }
-            else if(tmp2==null){
-                headA = headA.next;
-                tmp1 = tmp1.next;
-            }else{
-                tmp1 = tmp1.next;
-                tmp2 = tmp2.next;
-            }
+        // 如果相等就結束
+        while(tmp1 != tmp2){
+            // 交換,如果null表示先到終點,從另一個node重新開始跑,就能忽略掉兩節點相差的長度
+            tmp1 = tmp1==null ? headB : tmp1.next;
+            tmp2 = tmp2==null ? headA : tmp2.next;
         }
-
-        while(headA!=null){
-            // 如果相等時,表示有相交,停止迴圈
-            if(headA==headB)break;
-
-            headA = headA.next;
-            headB = headB.next;
-        }
-        return headA;
+        return tmp1;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
