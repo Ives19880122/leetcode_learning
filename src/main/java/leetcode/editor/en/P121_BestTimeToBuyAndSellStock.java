@@ -50,10 +50,6 @@ public class P121_BestTimeToBuyAndSellStock{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int maxProfit(int[] prices) {
-        // 參考提速1
-        if(prices.length==1){
-            return 0;
-        }
         // 起始值
         int min = prices[0];
         int maxProfit = 0;
