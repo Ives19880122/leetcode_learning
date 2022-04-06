@@ -24,8 +24,6 @@
 package leetcode.editor.en;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * id: 387
@@ -40,18 +38,15 @@ public class P387_FirstUniqueCharacterInAString{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int firstUniqChar(String s) {
-        char [] chars = s.toCharArray();
-        int result = -1;
-        HashMap<Character,Integer> map = new HashMap<>();
-        for(int i = 0; i < chars.length; i++){
-            map.compute(chars[i],(k,v)->v==null?  1 : v+1 );
+        // 參考解,使用char[] 暫存26個字母,找到只有累計為1的字母
+        char [] chars = new char[26];
+        for(int i = 0; i < s.length(); i++){
+            chars[s.charAt(i)-'a']++;
         }
-        for(int i = 0; i<chars.length; i++){
-            if(map.get(chars[i])==1){
-                return i;
-            }
+        for(int i = 0; i<s.length(); i++){
+            if(chars[s.charAt(i)-'a']==1) return i;
         }
-        return result;
+        return -1;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
