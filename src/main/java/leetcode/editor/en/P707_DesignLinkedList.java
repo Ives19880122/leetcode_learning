@@ -74,75 +74,76 @@ import leetcode.util.ListNode;
 public class P707_DesignLinkedList{
     //leetcode submit region begin(Prohibit modification and deletion)
 class MyLinkedList {
-    public ListNode head;
-    public ListNode tail;
-    public int size;
+    private ListNode head;
+    private ListNode tail;
+    private int size;
 
     public MyLinkedList() {
         this.head = null;
         this.tail = null;
         this.size = 0;
     }
-    
-    public int get(int index) {
-        if(index>=size){
-            return tail.val;
-        }
-        ListNode tmp = head;
-        while(index>0){
+
+    private ListNode travelNode(int index){
+        ListNode tmp = new ListNode(0,head);
+        while(index>=0){
             tmp = tmp.next;
             index--;
         }
-        return tmp.val;
+        return tmp;
+    }
+
+    public int get(int index) {
+        if(index>=size){
+            return -1;
+        }
+        ListNode node = travelNode(index);
+        return node.val;
     }
     
     public void addAtHead(int val) {
-        ListNode tmp = new ListNode(val);
-        if(this.head==null){
-            this.head = this.tail = tmp;
-        }else{
-            tmp.next = this.head;
-            this.head = tmp;
+        head = new ListNode(val,head);
+        if(size==0){
+            tail=head;
         }
-        this.size++;
+        size++;
     }
     
     public void addAtTail(int val) {
-        ListNode tmp = new ListNode(val);
-        this.tail.next =tmp;
-        this.tail = this.tail.next;
-        this.size++;
+        if(size==0){
+            addAtHead(val);
+        }else{
+            ListNode tmp = new ListNode(val);
+            tail.next = tmp;
+            tail = tail.next;
+            size++;
+        }
     }
     
     public void addAtIndex(int index, int val) {
         if(index==0){
             addAtHead(val);
         }
-        else if(index>=this.size){
+        else if(index==size){
             addAtTail(val);
+        }else if(index>size||index<0){
+            return;
         }else{
-            ListNode tmp = this.head;
-            while(index>1){
-                tmp = tmp.next;
-                index--;
-            }
-            ListNode bac = tmp.next;
-            tmp.next = new ListNode(val);
-            tmp.next.next = bac;
-            this.size++;
+            ListNode pre = travelNode(index-1);
+            pre.next = new ListNode(val,pre.next);
+            size++;
         }
     }
     
     public void deleteAtIndex(int index) {
+        if(index>=size || index<0) return;
+        ListNode pre = travelNode(index-1);
+        pre.next = pre.next.next;
         if(index==0){
             head = head.next;
-        }else{
-            ListNode tmp = this.head;
-            while(index>1){
-                tmp = tmp.next;
-                index--;
-            }
-            tmp.next = tmp.next.next;
+        }
+        if(index==size-1){
+            tail = pre;
         }
         size--;
     }
