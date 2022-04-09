@@ -27,7 +27,6 @@
 package leetcode.editor.en;
 
 import java.util.*;
-import java.util.Map.Entry;
 /**
  * id: 347
  * title: Top K Frequent Elements
@@ -41,17 +40,19 @@ public class P347_TopKFrequentElements{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
-        // 想法:map裝載後,使用stream排序回傳array
+        // 參考:map裝載後,搭配PriorityQueue使用
         Map<Integer,Integer> map = new HashMap<>();
+        PriorityQueue<Map.Entry<Integer,Integer>> que = new PriorityQueue<>(k, Comparator.comparingInt(Map.Entry::getValue));
         for(int val : nums){
             map.compute(val,(key,v)-> v!=null ? v+1:1);
         }
-        return map.entrySet()
-                .stream()
-                .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-                .mapToInt(d->d.getKey())
-                .limit(k)
-                .toArray();
+        for(Map.Entry<Integer,Integer> entry: map.entrySet()){
+            que.add(entry);
+            if(que.size()>k){
+                que.poll();
+            }
+        }
+        return que.stream().mapToInt(Map.Entry::getKey).toArray();
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
