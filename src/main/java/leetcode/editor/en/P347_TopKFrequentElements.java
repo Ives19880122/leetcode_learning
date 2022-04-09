@@ -42,17 +42,20 @@ class Solution {
     public int[] topKFrequent(int[] nums, int k) {
         // 參考:map裝載後,搭配PriorityQueue使用
         Map<Integer,Integer> map = new HashMap<>();
-        PriorityQueue<Map.Entry<Integer,Integer>> que = new PriorityQueue<>(k, Comparator.comparingInt(Map.Entry::getValue));
+        PriorityQueue<Map.Entry<Integer,Integer>> que = new PriorityQueue<>(k, (v1,v2)->v2.getValue()-v1.getValue());
         for(int val : nums){
             map.compute(val,(key,v)-> v!=null ? v+1:1);
         }
         for(Map.Entry<Integer,Integer> entry: map.entrySet()){
             que.add(entry);
-            if(que.size()>k){
-                que.poll();
-            }
         }
-        return que.stream().mapToInt(Map.Entry::getKey).toArray();
+        // 改用陣列取值, 注意長度與index差異
+        int[] result = new int[k];
+        while(k>0){
+            result[k-1]=que.poll().getKey();
+            k--;
+        }
+        return result;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
