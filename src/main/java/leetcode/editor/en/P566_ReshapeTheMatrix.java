@@ -53,16 +53,13 @@ class Solution {
     public int[][] matrixReshape(int[][] mat, int r, int c) {
         if(mat.length*mat[0].length != r*c)return mat;
         int[][] result = new int[r][c];
-        int idxr = 0;
-        int idxc = 0;
-        int oc = mat[0].length;
-        for(int i = 0; i<r; i++){
-            for(int j =0; j<c; j++){
-                result[i][j]=mat[idxr][idxc++];
-                if(idxc==oc){
-                    idxc=0;
-                    idxr++;
-                }
+        int idx = 0;
+        // 調整迴圈
+        for(int i = 0; i< mat.length; i++){
+            for(int j =0; j<mat[0].length; j++){
+                // 因為是int,整除會進位可當row,%會計算餘數當作col
+                result[idx/c][idx%c]=mat[i][j];
+                idx++;
             }
         }
         return result;
