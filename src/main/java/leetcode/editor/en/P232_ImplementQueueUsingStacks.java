@@ -72,22 +72,18 @@ public class P232_ImplementQueueUsingStacks{
     //leetcode submit region begin(Prohibit modification and deletion)
 class MyQueue {
     private final Stack<Integer> stack;
-    private int size;
 
     public MyQueue() {
         stack = new Stack<>();
-        size = 0;
     }
     
     public void push(int x) {
-        stack.add(size,x);
-        size++;
+        stack.add(stack.size(),x);
     }
     
     public int pop() {
         int val = stack.get(0);
         stack.remove(0);
-        size--;
         return val;
     }
     
@@ -96,7 +92,7 @@ class MyQueue {
     }
     
     public boolean empty() {
-        return size==0;
+        return stack.size()==0;
     }
 }
 
