@@ -42,25 +42,22 @@ class Solution {
         List<List<Integer>> r = new ArrayList<>();
         while(i<numRows){
             r.add(new ArrayList<>());
-            helper(r,i+1);
+            helper(r,i);
             i++;
         }
         return r;
     }
     private void helper(List<List<Integer>> r , int level){
-        List<Integer> ll = r.get(level-1);
-        if(level==1) {
-            ll.add(1);
-        }else if(level==2){
-            ll.add(1);
+        List<Integer> ll = r.get(level);
+        if(level==0) {
             ll.add(1);
         }else{
             ll.add(1);
-            List<Integer> b = r.get(level-2);
-            Iterator<Integer> itt = b.iterator();
-            int sum = itt.next();
-            while(itt.hasNext()){
-                int tmp = itt.next();
+            // 巴斯卡三角形疊加
+            Iterator<Integer> prev = r.get(level-1).iterator();
+            int sum = prev.next();
+            while(prev.hasNext()){
+                int tmp = prev.next();
                 ll.add(sum+tmp);
                 sum = tmp;
             }
