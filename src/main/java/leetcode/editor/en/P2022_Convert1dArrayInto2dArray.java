@@ -69,15 +69,11 @@ class Solution {
         // 判斷是否合法
         if(original.length!=m*n) return new int[0][0];
         int[][] result = new int[m][n];
-        int col = 0;
-        int row = 0;
-        // 參考單一迴圈方式做法
-        for(int i = 0; i<original.length; i++){
-            result[row][col] = original[i];
-            col++;
-            if(col==n){
-                col=0;
-                row++;
+        int idx = 0;
+        // 雙重迴圈(不判斷if)
+        for(int i = 0; i<m; i++){
+            for(int j =0; j<n; j++){
+                result[i][j]=original[idx++];
             }
         }
         return result;
