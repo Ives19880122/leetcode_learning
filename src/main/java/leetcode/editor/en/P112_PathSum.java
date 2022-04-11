@@ -68,17 +68,9 @@ public class P112_PathSum{
  */
 class Solution {
     public boolean hasPathSum(TreeNode root, int targetSum) {
-        if (root == null) {
-            return false;
-        }else if (isLeaf(root) && root.val == targetSum){
-            return true;
-        }else{
-            int next = targetSum - root.val;
-            return hasPathSum(root.left,next) || hasPathSum(root.right,next);
-        }
-    }
-    public boolean isLeaf(TreeNode node){
-        return node.left == null && node.right == null;
+        if(root == null) return false;
+        if(targetSum == root.val && root.left == null && root.right == null) return true;
+        return hasPathSum(root.left,targetSum - root.val) || hasPathSum(root.right,targetSum - root.val);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
