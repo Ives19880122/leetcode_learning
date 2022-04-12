@@ -42,11 +42,14 @@ public class P169_MajorityElement{
 class Solution {
     public int majorityElement(int[] nums) {
         int result = nums[0];
-        HashMap<Integer,Integer> map = new HashMap(nums.length/2);
-        for(int i =0 ; i< nums.length; i++){
-            map.compute(nums[i],(k,v)-> v== null ? 1: ++v);
-            if(map.getOrDefault(result,0)<map.get(nums[i]))
+        int count = 1;
+        for(int i = 1; i<nums.length; i++){
+            if(result==nums[i])
+                count++;
+            if(count==0)
                 result = nums[i];
+            if(result != nums[i])
+                count--;
         }
         return result;
     }
