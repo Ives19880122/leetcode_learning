@@ -44,15 +44,12 @@ public class P136_SingleNumber{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int singleNumber(int[] nums) {
-        Map<Integer,Integer> map = new HashMap<>(nums.length);
-        for(int num : nums){
-            if(map.containsKey(num)){
-                map.remove(num);
-            }else{
-                map.put(num,0);
-            }
+        // 參考解 改用XOR相消資料,最後剩下就是結果
+        int result = nums[0];
+        for(int i = 1; i<nums.length; i++){
+            result = result ^ nums[i];
         }
-        return map.keySet().iterator().next();
+        return result;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
