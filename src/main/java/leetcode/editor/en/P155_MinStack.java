@@ -73,7 +73,7 @@ class MinStack {
     
     public void push(int val) {
         list.add(size++,val);
-        min = min > val ? val : min;
+        min = Math.min(min, val);
     }
     
     public void pop() {
@@ -86,10 +86,9 @@ class MinStack {
 
     private void swap(){
         min = Integer.MAX_VALUE;
-        Iterator<Integer> itr = list.iterator();
-        while(itr.hasNext()){
-            int tmp = itr.next();
-            min = min>tmp ? tmp : min;
+        // 簡化寫法比迭代器慢1ms
+        for (int tmp : list) {
+            min = Math.min(min, tmp);
         }
     }
 
