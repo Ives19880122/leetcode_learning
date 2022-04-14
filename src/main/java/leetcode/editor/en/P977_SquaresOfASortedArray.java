@@ -47,23 +47,19 @@ public class P977_SquaresOfASortedArray{
 class Solution {
     public int[] sortedSquares(int[] nums) {
         int i = 0;
-        int k = i+1;
-        while(i<nums.length){
-            if(k<nums.length){
-                // swap
-                if(nums[i]*nums[i]>nums[k]*nums[k]){
-                    int tmp = nums[k];
-                    nums[k] = nums[i];
-                    nums[i] = tmp;
-                }
-                k++;
-            }else{
-                nums[i] *= nums[i];
+        int k = nums.length-1;
+        int [] result = new int [nums.length];
+        for(int r = result.length-1; r>=0; r--){
+            // swap
+            if(Math.abs(nums[i])>Math.abs(nums[k])){
+                result[r] = nums[i]*nums[i];
                 i++;
-                k=i+1;
+            }else{
+                result[r] = nums[k]*nums[k];
+                k--;
             }
         }
-        return nums;
+        return result;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
