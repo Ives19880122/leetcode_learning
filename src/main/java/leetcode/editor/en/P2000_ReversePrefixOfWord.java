@@ -64,14 +64,28 @@ public class P2000_ReversePrefixOfWord{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public String reversePrefix(String word, char ch) {
-        int idx = word.indexOf(ch);
-        String d = word.substring(idx+1);
-        StringBuilder pre = new StringBuilder();
-        while(idx>=0){
-            pre.append(word.charAt(idx));
-            idx--;
+        int l = 0;
+        int r = 0;
+        char arr [] = word.toCharArray();
+        boolean hasCh = false;
+
+        while(r<word.length()){
+            if(arr[r] == ch){
+                hasCh = true;
+                break;
+            }
+            r++;
+
         }
-        return pre+d;
+        while(r>l && hasCh){
+            char tmp = arr[r];
+            arr[r] = arr[l];
+            arr[l] = tmp;
+            r--;
+            l++;
+        }
+
+        return String.valueOf(arr);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
