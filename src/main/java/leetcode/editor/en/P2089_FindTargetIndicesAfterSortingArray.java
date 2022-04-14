@@ -61,30 +61,21 @@ public class P2089_FindTargetIndicesAfterSortingArray{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public List<Integer> targetIndices(int[] nums, int target) {
-        sort(nums);
         List<Integer> list = new ArrayList<>(nums.length);
-        for(int i = 0; i< nums.length; i++){
-            if(nums[i]==target) list.add(i);
+        // 參考答案, 不sort改寫
+        int freq = 0;
+        int idx = 0;
+        // 判定找到幾個target,以及最小的idx位置
+        for(int num : nums){
+            if(num==target) freq++;
+            if(num<target) idx++;
+        }
+        for(int i = 0; i<freq; i++){
+            list.add(idx++);
         }
         return list;
     }
 
-    private void sort(int[] nums){
-        int l = 0;
-        int r = 1;
-        while(l<nums.length){
-            while(r< nums.length){
-                if(nums[l]>nums[r]){
-                    int tmp = nums[l];
-                    nums[l] = nums[r];
-                    nums[r] = tmp;
-                }
-                r++;
-            }
-            r=l+1;
-            l++;
-        }
-    }
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
