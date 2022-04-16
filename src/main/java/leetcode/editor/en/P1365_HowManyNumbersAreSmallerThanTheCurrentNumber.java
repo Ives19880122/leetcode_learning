@@ -55,13 +55,15 @@ public class P1365_HowManyNumbersAreSmallerThanTheCurrentNumber{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] smallerNumbersThanCurrent(int[] nums) {
-        int[] result = new int[nums.length];
-        for(int i =0; i<nums.length; i++){
-            for(int j=0; j< nums.length; j++){
-                if(nums[i]>nums[j]) result[i]++;
-            }
-        }
-        return result;
+        // 邊界範圍是 0 ~ 100
+        int[] count = new int[102];
+        // 建立索引資料
+        for(int num : nums) count[num+1]++;
+        // 索引調整,計算數目
+        for(int i=0; i<101; i++) count[i+1] += count[i];
+        // 更新nums
+        for(int i=0; i< nums.length; i++) nums[i] = count[nums[i]];
+        return nums;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
