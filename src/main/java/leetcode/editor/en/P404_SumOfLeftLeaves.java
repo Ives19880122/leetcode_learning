@@ -64,20 +64,19 @@ public class P404_SumOfLeftLeaves{
  * }
  */
 class Solution {
-    int sum = 0;
     public int sumOfLeftLeaves(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        while(!queue.isEmpty()){
-            TreeNode parent = queue.remove();
-            if(parent.left!=null && isLeaf(parent.left)) sum += parent.left.val;
-            if(parent.left!=null)queue.add(parent.left);
-            if(parent.right!=null)queue.add(parent.right);
+        if(root == null) return 0;
+        int sum = 0;
+        // 調整遞迴解
+        if(root.left != null){
+            // 踩到left leaf
+            if(root.left.left == null && root.left.right == null) sum += root.left.val;
+            // 繼續往左樹搜尋
+            else sum += sumOfLeftLeaves(root.left);
         }
+        // 右樹往下搜尋,遞迴是否有左邊節點
+        sum += sumOfLeftLeaves(root.right);
         return sum;
-    }
-    private boolean isLeaf(TreeNode node){
-        return node.left == null && node.right == null;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
