@@ -73,22 +73,18 @@ public class P1022_SumOfRootToLeafBinaryNumbers{
  * }
  */
 class Solution {
-    private final List<Integer> list = new ArrayList<>();
+    private int result = 0;
     public int sumRootToLeaf(TreeNode root) {
         // 0 表示都給正整數
-        helper(root,"0");
-        int result = 0;
-        for(int num : list) result += num;
+        helper(root,0);
         return result;
     }
     // dfs preOrder Traversal, String紀錄走過的path
-    void helper(TreeNode node, String path){
+    void helper(TreeNode node, int path){
         if(node == null)return;
-        helper(node.left,path+node.val);
-        if(isLeaf(node)){
-            list.add(Integer.valueOf(path + node.val,2));
-        }
-        helper(node.right,path+node.val);
+        helper(node.left,path<<1 | node.val);
+        if(isLeaf(node))result += path<<1 | node.val;
+        helper(node.right,path<<1 | node.val);
     }
     // 判斷是否為leaf
     boolean isLeaf(TreeNode node){
