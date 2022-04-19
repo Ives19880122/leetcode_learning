@@ -67,21 +67,28 @@ public class P99_RecoverBinarySearchTree{
  * }
  */
 class Solution {
-    private boolean hasTravel = false;
-    private final PriorityQueue<Integer> queue = new PriorityQueue<>();
+    private TreeNode first = null;
+    private TreeNode second = null;
+    private TreeNode prev = new TreeNode(Integer.MIN_VALUE);
     public void recoverTree(TreeNode root) {
         inOrder(root);
-        this.hasTravel=true;
-        inOrder(root);
+        int tmp = first.val;
+        first.val = second.val;
+        second.val = tmp;
     }
+    // 使用inorder原因, 由小到大排列
     void inOrder(TreeNode node){
         if(node==null)return;
         inOrder(node.left);
-        if(!hasTravel){
-            this.queue.offer(node.val);
-        }else if(!queue.isEmpty()){
-            node.val = this.queue.poll();
+        // 如果是空的話, 表示遇到第一個需要調整的節點, 可能為前後節點
+        if(first==null&&prev.val>node.val){
+            first = prev;
         }
+        // 紀錄當下節點
+        if(prev.val>node.val){
+            second = node;
+        }
+        prev = node;
         inOrder(node.right);
     }
 }
