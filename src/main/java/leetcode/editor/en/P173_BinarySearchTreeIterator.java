@@ -62,6 +62,7 @@
     
 package leetcode.editor.en;
 
+import leetcode.util.ListNode;
 import leetcode.util.TreeNode;
 
 import java.util.*;
@@ -93,24 +94,24 @@ public class P173_BinarySearchTreeIterator{
  * }
  */
 class BSTIterator {
-    private TreeNode ittr = new TreeNode(0);
-    private TreeNode head = ittr;
+    private ListNode ittr = new ListNode(0);
+    private ListNode head = ittr;
     public BSTIterator(TreeNode root) {
        dfs(root);
-       ittr = ittr.right;
+       ittr = ittr.next;
     }
 
     void dfs(TreeNode node){
         if(node==null) return;
         dfs(node.left);
-        head.right = new TreeNode(node.val);
-        head = head.right;
+        head.next = new ListNode(node.val);
+        head = head.next;
         dfs(node.right);
     }
     
     public int next() {
        int val = ittr.val;
-       ittr = ittr.right;
+       ittr = ittr.next;
        return val;
     }
     
