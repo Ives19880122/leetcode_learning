@@ -93,26 +93,29 @@ public class P173_BinarySearchTreeIterator{
  * }
  */
 class BSTIterator {
-    List<Integer> list;
-    int idx = 0;
+    private TreeNode ittr = new TreeNode(0);
+    private TreeNode head = ittr;
     public BSTIterator(TreeNode root) {
-       this.list = new ArrayList<>();
        dfs(root);
+       ittr = ittr.right;
     }
 
     void dfs(TreeNode node){
         if(node==null) return;
-            dfs(node.left);
-            list.add(node.val);
-            dfs(node.right);
+        dfs(node.left);
+        head.right = new TreeNode(node.val);
+        head = head.right;
+        dfs(node.right);
     }
     
     public int next() {
-       return list.get(idx++);
+       int val = ittr.val;
+       ittr = ittr.right;
+       return val;
     }
     
     public boolean hasNext() {
-        return idx<list.size();
+        return ittr != null;
     }
 }
 
