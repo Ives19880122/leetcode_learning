@@ -44,6 +44,9 @@
 
 package leetcode.editor.en;
 
+import leetcode.util.ListNode;
+
+import java.util.Hashtable;
 import java.util.LinkedList;
 
 /**
@@ -59,21 +62,44 @@ public class P705_DesignHashset{
   
   //leetcode submit region begin(Prohibit modification and deletion)
 class MyHashSet {
-    private LinkedList<Integer> list;
+    private int arr [];
     public MyHashSet() {
-        list = new LinkedList<>();
+        arr = new int[0];
     }
-    
+    private void rehash(){
+        int len = 1;
+        for(int i=0;i<arr.length; i++){
+            if(arr[i]!=-1) len++;
+        }
+        int[] tmp = new int[len];
+        len = 0;
+        for(int i=0;i<arr.length; i++){
+            if(arr[i]!=-1) tmp[len++] = arr[i];
+        }
+        arr = tmp;
+    }
+
     public void add(int key) {
-        if(!contains(key))list.add(key);
+        if(!contains(key)) {
+            rehash();
+            arr[arr.length-1] = key;
+        }
     }
     
     public void remove(int key) {
-        if(contains(key))list.remove(list.indexOf(key));
+        int idx = search(key);
+        arr[idx] = -1;
     }
-    
+
+    private int search(int key){
+        for(int i = 0; i< arr.length; i++){
+            if(arr[i]==key)return i;
+        }
+        return -1;
+    }
+
     public boolean contains(int key) {
-        return list.indexOf(key)!=-1;
+        return search(key)!=-1;
     }
 }
 
