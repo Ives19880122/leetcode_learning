@@ -62,46 +62,49 @@ public class P705_DesignHashset{
   
   //leetcode submit region begin(Prohibit modification and deletion)
 class MyHashSet {
-    private int[] arr;
+    private final ListNode[] buck;
+    private final int buckSize;
     public MyHashSet() {
-        arr = new int[0];
+        buckSize = 20000;
+        buck = new ListNode[buckSize];
     }
-    private void rehash(int key){
-        int len = arr.length + key;
-        int[] tmp = new int[len];
-        int idx = 0;
-        for(int num : arr){
-            if(num!=-1){
-                tmp[idx] = num;
-                idx++;
-            }
-        }
-        arr = tmp;
-    }
+
     public void add(int key) {
-        if(!contains(key)) {
-            rehash(1);
-            arr[arr.length-1] = key;
+        ListNode tmp = buck[key%buckSize];
+        if(tmp==null) {
+            buck[key%buckSize] = new ListNode(key);
+        }else{
+                ListNode cur = tmp;
+                ListNode prev = cur;
+                while(cur!=null){
+                    if(cur.val == key) return;
+                    prev = cur;
+                    cur = cur.next;
+                }
+                prev.next = new ListNode(key);
         }
     }
     
     public void remove(int key) {
-        int idx = search(key);
-        if(idx!=-1){
-            arr[idx] = -1;
-            rehash(-1);
+        ListNode cur = buck[key%buckSize];
+        while(cur!=null){
+            if(cur.val == key) {
+                cur.val = -1;
+                return;
+            }
+            cur = cur.next;
         }
-    }
-
-    private int search(int key){
-        for(int i = 0; i< arr.length; i++){
-            if(arr[i]==key)return i;
-        }
-        return -1;
     }
 
     public boolean contains(int key) {
-        return search(key)!=-1;
+        ListNode cur = buck[key%buckSize];
+        while(cur!=null){
+            if(cur.val == key) {
+                return true;
+            }
+            cur = cur.next;
+        }
+        return false;
     }
 }
 
