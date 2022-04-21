@@ -43,6 +43,9 @@
 //73
 
 package leetcode.editor.en;
+
+import java.util.LinkedList;
+
 /**
   * id：705
   * title：Design HashSet
@@ -56,21 +59,21 @@ public class P705_DesignHashset{
   
   //leetcode submit region begin(Prohibit modification and deletion)
 class MyHashSet {
-    private int[] arr;
+    private LinkedList<Integer> list;
     public MyHashSet() {
-        arr = new int[1000003];
+        list = new LinkedList<>();
     }
     
     public void add(int key) {
-        if(arr[key]==0)arr[key]++;
+        if(!contains(key))list.add(key);
     }
     
     public void remove(int key) {
-        if(contains(key))arr[key]--;
+        if(contains(key))list.remove(list.indexOf(key));
     }
     
     public boolean contains(int key) {
-        return arr[key]>0;
+        return list.indexOf(key)!=-1;
     }
 }
 
