@@ -23,6 +23,8 @@
     
 package leetcode.editor.en;
 
+import leetcode.util.ListNode;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,14 +41,22 @@ public class P217_ContainsDuplicate{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean containsDuplicate(int[] nums) {
-        int i = 0;
-        Set<Integer> tmp = new HashSet<>();
-        while(i<nums.length){
-            if(tmp.contains(nums[i])){
-                return true;
+        int buckSize = nums.length;
+        ListNode[] buck = new ListNode[buckSize];
+        for(int num : nums){
+            int hash = Math.abs(num)%buckSize;
+            ListNode node = buck[hash];
+            if(node==null){
+                buck[hash] = new ListNode(num);
+            }else{
+                ListNode prev = node;
+                while(node!=null){
+                    if(node.val == num) return true;
+                    prev = node;
+                    node = node.next;
+                }
+                prev.next = new ListNode(num);
             }
-            tmp.add(nums[i]);
-            i++;
         }
         return false;
     }
