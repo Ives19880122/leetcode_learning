@@ -36,6 +36,7 @@ import leetcode.util.TreeNode;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 /**
@@ -65,18 +66,25 @@ public class P637_AverageOfLevelsInBinaryTree{
  * }
  */
 class Solution {
-    List<List<Integer>> data = new ArrayList<>();
     public List<Double> averageOfLevels(TreeNode root) {
-        helper(root,0);
-        return data.stream().map(list->list.stream().mapToDouble(Integer::longValue).average().getAsDouble())
-                .collect(Collectors.toList());
-    }
-    void helper(TreeNode node, int level){
-        if(node==null)return;
-        if(level == data.size()) data.add(new ArrayList<>());
-        data.get(level).add(node.val);
-        helper(node.left,level+1);
-        helper(node.right,level+1);
+        // 參考使用level traversal解
+        List<Double> result = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            double sum = 0.0;
+            for(int i=0; i<size; i++){
+                TreeNode node = queue.poll();
+                if(node!=null) {
+                    sum += node.val;
+                    if(node.left!=null) queue.add(node.left);
+                    if(node.right!=null) queue.add(node.right);
+                }
+            }
+            result.add(sum/size);
+        }
+        return result;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
