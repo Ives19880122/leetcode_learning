@@ -62,33 +62,35 @@ public class P705_DesignHashset{
   
   //leetcode submit region begin(Prohibit modification and deletion)
 class MyHashSet {
-    private int arr [];
+    private int[] arr;
     public MyHashSet() {
         arr = new int[0];
     }
-    private void rehash(){
-        int len = 1;
-        for(int i=0;i<arr.length; i++){
-            if(arr[i]!=-1) len++;
-        }
+    private void rehash(int key){
+        int len = arr.length + key;
         int[] tmp = new int[len];
-        len = 0;
-        for(int i=0;i<arr.length; i++){
-            if(arr[i]!=-1) tmp[len++] = arr[i];
+        int idx = 0;
+        for(int num : arr){
+            if(num!=-1){
+                tmp[idx] = num;
+                idx++;
+            }
         }
         arr = tmp;
     }
-
     public void add(int key) {
         if(!contains(key)) {
-            rehash();
+            rehash(1);
             arr[arr.length-1] = key;
         }
     }
     
     public void remove(int key) {
         int idx = search(key);
-        arr[idx] = -1;
+        if(idx!=-1){
+            arr[idx] = -1;
+            rehash(-1);
+        }
     }
 
     private int search(int key){
