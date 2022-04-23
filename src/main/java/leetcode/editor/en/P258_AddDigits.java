@@ -45,15 +45,15 @@ public class P258_AddDigits{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int addDigits(int num) {
-        // 參考wiki Digit sum 公式撰寫
-        int k = (int) Math.log10(num)+1;
-        int result = 0;
-        for(int i =0; i<k; i++){
-            result += (num % (int)Math.pow(10,i+1) - num % (int)Math.pow(10,i))
-                    / (int)Math.pow(10,i);
+        while(num>9){
+            int sum = 0;
+            while(num!=0){
+                sum += num%10;
+                num /= 10;
+            }
+            num = sum;
         }
-        if(result>9) result = addDigits(result);
-        return result;
+        return num;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
