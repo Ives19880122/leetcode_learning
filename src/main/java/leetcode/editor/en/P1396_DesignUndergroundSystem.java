@@ -145,13 +145,9 @@ public class P1396_DesignUndergroundSystem{
 class UndergroundSystem {
     private class RecordNode {
         public String startStation;
-        public String endStation;
-        public int id;
         public int in;
         public int out;
-        public int total;
-        public RecordNode(int id, String startStation, int in){
-            this.id = id;
+        public RecordNode(String startStation, int in){
             this.startStation = startStation;
             this.in = in;
         }
@@ -164,16 +160,14 @@ class UndergroundSystem {
     }
     
     public void checkIn(int id, String stationName, int t) {
-        RecordNode node = new RecordNode(id,stationName,t);
+        RecordNode node = new RecordNode(stationName,t);
         onTravel.put(id,node);
     }
     
     public void checkOut(int id, String stationName, int t) {
         RecordNode node = onTravel.remove(id);
         node.out = t;
-        node.total = node.out - node.in;
-        node.endStation = stationName;
-        String key = node.startStation + "-" +node.endStation;
+        String key = node.startStation + "-" +stationName;
         if(!indexedRecord.containsKey(key)) indexedRecord.put(key,new HashSet<>());
         Set<RecordNode> recodes = indexedRecord.get(key);
         recodes.add(node);
@@ -182,11 +176,14 @@ class UndergroundSystem {
     public double getAverageTime(String startStation, String endStation) {
         Set<RecordNode> set = indexedRecord.getOrDefault(startStation+"-"+endStation,new HashSet<>());
         int size = set.size();
-        double sum = 0.0;
-        for(RecordNode node : set){
-            sum += node.total;
+        if(size>0){
+            double sum = 0.0;
+            for(RecordNode node : set){
+                sum += node.out - node.in;
+            }
+            return sum/size;
         }
-        return size>0 ? sum / size : 0;
+        return 0;
     }
 }
 
