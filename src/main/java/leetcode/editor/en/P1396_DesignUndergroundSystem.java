@@ -180,10 +180,7 @@ class UndergroundSystem {
     }
     
     public double getAverageTime(String startStation, String endStation) {
-        Set<RecordNode> set = indexedRecord.getOrDefault(startStation+"-"+endStation,new HashSet<>())
-                .stream()
-                .filter(r-> r.startStation.equals(startStation)&&r.endStation.equals(endStation))
-                .collect(Collectors.toSet());
+        Set<RecordNode> set = indexedRecord.getOrDefault(startStation+"-"+endStation,new HashSet<>());
         int size = set.size();
         double sum = 0.0;
         for(RecordNode node : set){
