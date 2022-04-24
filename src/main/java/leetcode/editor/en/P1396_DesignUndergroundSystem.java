@@ -167,23 +167,19 @@ class UndergroundSystem {
     public void checkOut(int id, String stationName, int t) {
         RecordNode node = onTravel.remove(id);
         node.out = t;
-        String key = node.startStation + "-" +stationName;
+        String key = node.startStation + "-" + stationName;
         if(!indexedRecord.containsKey(key)) indexedRecord.put(key,new HashSet<>());
         Set<RecordNode> recodes = indexedRecord.get(key);
         recodes.add(node);
     }
     
     public double getAverageTime(String startStation, String endStation) {
-        Set<RecordNode> set = indexedRecord.getOrDefault(startStation+"-"+endStation,new HashSet<>());
-        int size = set.size();
-        if(size>0){
-            double sum = 0.0;
-            for(RecordNode node : set){
-                sum += node.out - node.in;
-            }
-            return sum/size;
-        }
-        return 0;
+        return indexedRecord
+                .getOrDefault(startStation+"-"+endStation,new HashSet<>())
+                .stream()
+                .mapToDouble(r->r.out-r.in)
+                .average()
+                .getAsDouble();
     }
 }
 
