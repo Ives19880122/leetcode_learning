@@ -147,11 +147,11 @@ class UndergroundSystem {
             this.in = in;
         }
     }
-    Map<Integer,RecordNode> onTravel;
-    Map<String,Set<int[]>> indexedRecord;
+    Map<Integer,RecordNode> onTravel;      // 進站紀錄
+    Map<String,Double[]> stationRecord;    // 車站進出人數,累計時間
     public UndergroundSystem() {
         onTravel = new HashMap<>();
-        indexedRecord = new HashMap<>();
+        stationRecord = new HashMap<>();
     }
     
     public void checkIn(int id, String stationName, int t) {
@@ -161,22 +161,23 @@ class UndergroundSystem {
     
     public void checkOut(int id, String stationName, int t) {
         RecordNode node = onTravel.remove(id);
-        String key = node.startStation +"-" + stationName;
-        if(!indexedRecord.containsKey(key)) indexedRecord.put(key,new HashSet<>());
-        Set<int[]> recodes = indexedRecord.get(key);
-        recodes.add(new int[]{node.in,t});
+        String key = node.startStation + "-" + stationName;
+        double time = t - node.in;
+        if(!stationRecord.containsKey(key)) {
+            stationRecord.put(key, new Double[]{1.0, time});
+        }else{
+            Double[] record = stationRecord.get(key);
+            record[1] = ((record[1]*record[0]) + time) / (record[0]+1);
+            record[0]++;
+        }
     }
     
     public double getAverageTime(String startStation, String endStation) {
-        Set<int[]> set = indexedRecord.get(startStation+"-"+endStation);
-        double sum = 0.0;
-        if(set!=null){
-            for(int[] num : set){
-                sum += num[1]-num[0];
-            }
-            return sum/set.size();
+        Double[] record = stationRecord.get(startStation+"-"+endStation);
+        if(record!=null){
+            return record[1];
         }
-        return sum;
+        return 0;
     }
 }
 
