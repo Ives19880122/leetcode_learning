@@ -148,7 +148,7 @@ class UndergroundSystem {
         }
     }
     Map<Integer,RecordNode> onTravel;
-    Map<String,List<Integer>> indexedRecord;
+    Map<String,Set<int[]>> indexedRecord;
     public UndergroundSystem() {
         onTravel = new HashMap<>();
         indexedRecord = new HashMap<>();
@@ -162,19 +162,19 @@ class UndergroundSystem {
     public void checkOut(int id, String stationName, int t) {
         RecordNode node = onTravel.remove(id);
         String key = node.startStation +"-" + stationName;
-        if(!indexedRecord.containsKey(key)) indexedRecord.put(key,new ArrayList<>());
-        List<Integer> recodes = indexedRecord.get(key);
-        recodes.add(t-node.in);
+        if(!indexedRecord.containsKey(key)) indexedRecord.put(key,new HashSet<>());
+        Set<int[]> recodes = indexedRecord.get(key);
+        recodes.add(new int[]{node.in,t});
     }
     
     public double getAverageTime(String startStation, String endStation) {
-        List<Integer> list = indexedRecord.get(startStation+"-"+endStation);
+        Set<int[]> set = indexedRecord.get(startStation+"-"+endStation);
         double sum = 0.0;
-        if(list!=null){
-            for(int num : list){
-                sum += num;
+        if(set!=null){
+            for(int[] num : set){
+                sum += num[1]-num[0];
             }
-            return sum/list.size();
+            return sum/set.size();
         }
         return sum;
     }
