@@ -145,6 +145,7 @@ public class P1396_DesignUndergroundSystem{
 class UndergroundSystem {
     private class RecordNode {
         public String startStation;
+        public String endStation;
         public int in;
         public int out;
         public RecordNode(String startStation, int in){
@@ -167,16 +168,17 @@ class UndergroundSystem {
     public void checkOut(int id, String stationName, int t) {
         RecordNode node = onTravel.remove(id);
         node.out = t;
-        String key = node.startStation + "-" + stationName;
-        if(!indexedRecord.containsKey(key)) indexedRecord.put(key,new HashSet<>());
-        Set<RecordNode> recodes = indexedRecord.get(key);
+        node.endStation = stationName;
+        if(!indexedRecord.containsKey(node.startStation)) indexedRecord.put(node.startStation,new HashSet<>());
+        Set<RecordNode> recodes = indexedRecord.get(node.startStation);
         recodes.add(node);
     }
     
     public double getAverageTime(String startStation, String endStation) {
         return indexedRecord
-                .getOrDefault(startStation+"-"+endStation,new HashSet<>())
+                .getOrDefault(startStation,new HashSet<>())
                 .stream()
+                .filter(r->r.endStation.equals(endStation))
                 .mapToDouble(r->r.out-r.in)
                 .average()
                 .getAsDouble();
