@@ -125,11 +125,7 @@
     
 package leetcode.editor.en;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * id: 1396
@@ -145,16 +141,14 @@ public class P1396_DesignUndergroundSystem{
 class UndergroundSystem {
     private class RecordNode {
         public String startStation;
-        public String endStation;
         public int in;
-        public int out;
         public RecordNode(String startStation, int in){
             this.startStation = startStation;
             this.in = in;
         }
     }
     Map<Integer,RecordNode> onTravel;
-    Map<String,Set<RecordNode>> indexedRecord;
+    Map<String,List<Integer>> indexedRecord;
     public UndergroundSystem() {
         onTravel = new HashMap<>();
         indexedRecord = new HashMap<>();
@@ -167,21 +161,22 @@ class UndergroundSystem {
     
     public void checkOut(int id, String stationName, int t) {
         RecordNode node = onTravel.remove(id);
-        node.out = t;
-        node.endStation = stationName;
-        if(!indexedRecord.containsKey(node.startStation)) indexedRecord.put(node.startStation,new HashSet<>());
-        Set<RecordNode> recodes = indexedRecord.get(node.startStation);
-        recodes.add(node);
+        String key = node.startStation +"-" + stationName;
+        if(!indexedRecord.containsKey(key)) indexedRecord.put(key,new ArrayList<>());
+        List<Integer> recodes = indexedRecord.get(key);
+        recodes.add(t-node.in);
     }
     
     public double getAverageTime(String startStation, String endStation) {
-        return indexedRecord
-                .getOrDefault(startStation,new HashSet<>())
-                .stream()
-                .filter(r->r.endStation.equals(endStation))
-                .mapToDouble(r->r.out-r.in)
-                .average()
-                .getAsDouble();
+        List<Integer> list = indexedRecord.get(startStation+"-"+endStation);
+        double sum = 0.0;
+        if(list!=null){
+            for(int num : list){
+                sum += num;
+            }
+            return sum/list.size();
+        }
+        return sum;
     }
 }
 
