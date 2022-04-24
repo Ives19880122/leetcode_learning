@@ -136,50 +136,55 @@ import java.util.*;
  * import leetcode.editor.en.P1396_DesignUndergroundSystem .Solution;
  * P1396_DesignUndergroundSystem_Test
  */
-public class P1396_DesignUndergroundSystem{
+public class P1396_DesignUndergroundSystem {
     //leetcode submit region begin(Prohibit modification and deletion)
-class UndergroundSystem {
-    private class RecordNode {
-        public String startStation;
-        public int in;
-        public RecordNode(String startStation, int in){
-            this.startStation = startStation;
-            this.in = in;
+    class UndergroundSystem {
+        private class RecordNode {
+            public String startStation;
+            public int in;
+            public int out;
+
+            public RecordNode(String startStation, int in) {
+                this.startStation = startStation;
+                this.in = in;
+            }
+        }
+
+        Map<Integer, RecordNode> onTravel;
+        Map<String, Set<RecordNode>> indexedRecord;
+
+        public UndergroundSystem() {
+            onTravel = new HashMap<>();
+            indexedRecord = new HashMap<>();
+        }
+
+        public void checkIn(int id, String stationName, int t) {
+            RecordNode node = new RecordNode(stationName, t);
+            onTravel.put(id, node);
+        }
+
+        public void checkOut(int id, String stationName, int t) {
+            RecordNode node = onTravel.remove(id);
+            node.out = t;
+            String key = node.startStation + "-" + stationName;
+            if (!indexedRecord.containsKey(key)) indexedRecord.put(key, new HashSet<>());
+            Set<RecordNode> recodes = indexedRecord.get(key);
+            recodes.add(node);
+        }
+
+        public double getAverageTime(String startStation, String endStation) {
+            Set<RecordNode> set = indexedRecord.getOrDefault(startStation + "-" + endStation, new HashSet<>());
+            int size = set.size();
+            if (size > 0) {
+                double sum = 0.0;
+                for (RecordNode node : set) {
+                    sum += node.out - node.in;
+                }
+                return sum / size;
+            }
+            return 0;
         }
     }
-    Map<Integer,RecordNode> onTravel;      // 進站紀錄
-    Map<String,Double[]> stationRecord;    // 車站進出人數,累計時間
-    public UndergroundSystem() {
-        onTravel = new HashMap<>();
-        stationRecord = new HashMap<>();
-    }
-    
-    public void checkIn(int id, String stationName, int t) {
-        RecordNode node = new RecordNode(stationName,t);
-        onTravel.put(id,node);
-    }
-    
-    public void checkOut(int id, String stationName, int t) {
-        RecordNode node = onTravel.remove(id);
-        String key = node.startStation + "-" + stationName;
-        double time = t - node.in;
-        if(!stationRecord.containsKey(key)) {
-            stationRecord.put(key, new Double[]{1.0, time});
-        }else{
-            Double[] record = stationRecord.get(key);
-            record[1] = ((record[1]*record[0]) + time) / (record[0]+1);
-            record[0]++;
-        }
-    }
-    
-    public double getAverageTime(String startStation, String endStation) {
-        Double[] record = stationRecord.get(startStation+"-"+endStation);
-        if(record!=null){
-            return record[1];
-        }
-        return 0;
-    }
-}
 
 /**
  * Your UndergroundSystem object will be instantiated and called as such:
