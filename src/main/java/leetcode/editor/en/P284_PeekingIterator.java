@@ -58,6 +58,7 @@ package leetcode.editor.en;
 import leetcode.util.ListNode;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * id: 284
@@ -74,35 +75,30 @@ public class P284_PeekingIterator{
 // https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html
 
 class PeekingIterator implements Iterator<Integer> {
-	ListNode head;
-	ListNode node;
+	Iterator<Integer> iterator;
+	Integer cur;
 	public PeekingIterator(Iterator<Integer> iterator) {
 	    // initialize any member here.
-		head = new ListNode(0);
-		node = head;
-		iterator.forEachRemaining(d->{
-			node.next = new ListNode(d);
-			node = node.next;
-		});
+		this.iterator = iterator;
+		this.cur = iterator.next();
 	}
 	
     // Returns the next element in the iteration without advancing the iterator.
 	public Integer peek() {
-    	ListNode tmp = head;
-		return head.next != null ? head.next.val : null;
+		return cur;
 	}
 	
 	// hasNext() and next() should behave the same as in the Iterator interface.
 	// Override them if needed.
 	@Override
 	public Integer next() {
-		head = head.next;
-		return head.val;
+		Integer tmp = cur;
+		cur = iterator.hasNext() ? iterator.next(): null;
+		return tmp;
 	}
-	
 	@Override
 	public boolean hasNext() {
-	    return head.next != null;
+	    return cur != null;
 	}
 }
 //leetcode submit region end(Prohibit modification and deletion)
