@@ -54,16 +54,17 @@ class Solution {
         int start = 0;
         int end = 10;
         HashMap<String,Integer> map = new HashMap<>();
+        List<String> list = new ArrayList<>();
         // 調整操作
         while(s.length()>10 && end<=s.length()){
             map.compute(s.substring(start++,end++),
-                    (k,v)-> v==null? 1: v+1);
+                    (k,v)-> {
+                int result = v==null? 1: v+1;
+                if(result==2) list.add(k);
+                return result;
+            });
         }
-        return map.entrySet()
-                .stream()
-                .filter(entry->entry.getValue()>1)
-                .map(entry->entry.getKey())
-                .collect(Collectors.toList());
+        return list;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
