@@ -51,18 +51,20 @@ public class P187_RepeatedDnaSequences{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public List<String> findRepeatedDnaSequences(String s) {
+        List<String> list = new ArrayList<>();
+        if(s.length()<=10) return list;
         int start = 0;
         int end = 10;
         HashMap<String,Integer> map = new HashMap<>();
-        List<String> list = new ArrayList<>();
         // 調整操作
-        while(s.length()>10 && end<=s.length()){
-            map.compute(s.substring(start++,end++),
-                    (k,v)-> {
-                int result = v==null? 1: v+1;
-                if(result==2) list.add(k);
-                return result;
-            });
+        while(end<=s.length()){
+            String key = s.substring(start++,end++);
+            if(!map.containsKey(key)){
+                map.put(key,1);
+            }else if(map.get(key)==1){
+                map.put(key,2);
+                list.add(key);
+            }
         }
         return list;
     }
