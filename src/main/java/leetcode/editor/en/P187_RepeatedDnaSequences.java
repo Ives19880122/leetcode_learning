@@ -33,7 +33,6 @@
 package leetcode.editor.en;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * id: 187
@@ -48,21 +47,15 @@ public class P187_RepeatedDnaSequences{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public List<String> findRepeatedDnaSequences(String s) {
-        List<String> list = new ArrayList<>();
-        if(s.length()<=10) return list;
-        int start = 0;
-        int end = 10;
+        Set<String> map = new HashSet<>();
         Set<String> set = new HashSet<>();
-        // 調整操作
-        while(end<=s.length()){
-            String key = s.substring(start++,end++);
-            if(!set.contains(key)){
-                set.add(key);
-            }else if(!list.contains(key)){
-                list.add(key);
+        for(int i = 0; i <= s.length()-10; i++){
+            String key = s.substring(i,i+10);
+            if(!set.add(key)){
+                map.add(key);
             }
         }
-        return list;
+        return new ArrayList<>(map);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
