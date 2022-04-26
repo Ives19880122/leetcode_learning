@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * id: 187
@@ -50,22 +51,19 @@ public class P187_RepeatedDnaSequences{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public List<String> findRepeatedDnaSequences(String s) {
-        List<String> list = new ArrayList<>();
         int start = 0;
         int end = 10;
         HashMap<String,Integer> map = new HashMap<>();
-        // 迴圈比對所有字串會超時,改用map
+        // 調整操作
         while(s.length()>10 && end<=s.length()){
-            String ref = s.substring(start,end);
-            if(!map.containsKey(ref)){
-                map.put(ref,1);
-            }else if(!list.contains(ref)){
-                list.add(ref);
-            }
-            start++;
-            end++;
+            map.compute(s.substring(start++,end++),
+                    (k,v)-> v==null? 1: v+1);
         }
-        return list;
+        return map.entrySet()
+                .stream()
+                .filter(entry->entry.getValue()>1)
+                .map(entry->entry.getKey())
+                .collect(Collectors.toList());
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
