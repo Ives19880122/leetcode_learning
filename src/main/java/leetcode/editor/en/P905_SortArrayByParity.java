@@ -43,19 +43,19 @@ public class P905_SortArrayByParity{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] sortArrayByParity(int[] nums) {
-        int idx = 0;
-        int [] result = new int[nums.length];
-        for(int num : nums){
-            if(num%2==0){
-                result[idx++] = num;
+        int slow=0;
+        int fast= 0;
+        // 參考雙指標做法
+        while(fast< nums.length){
+            if(nums[fast]%2==0){
+                int tmp = nums[slow];
+                nums[slow]=nums[fast];
+                nums[fast]=tmp;
+                slow++;
             }
+            fast++;
         }
-        for(int num : nums){
-            if(num%2==1){
-                result[idx++] = num;
-            }
-        }
-        return result;
+        return nums;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
