@@ -25,9 +25,6 @@ package leetcode.editor.en;
 
 import leetcode.util.ListNode;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * id: 217
  * title: Contains Duplicate

@@ -41,8 +41,6 @@ package leetcode.editor.en;
 
 import leetcode.util.ListNode;
 
-import java.util.Stack;
-
 /**
  * id: 19
  * title: Remove Nth Node From End of List

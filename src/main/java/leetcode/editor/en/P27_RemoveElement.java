@@ -73,10 +73,7 @@ package leetcode.editor.en;
  * @date    2021-10-04 23:44:43 
  */
 public class P27_RemoveElement {
-    public static void main(String[] args) {
-        Solution solution = new P27_RemoveElement().new Solution();
-    }
-    //leetcode submit region begin(Prohibit modification and deletion)
+//leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int removeElement(int[] nums, int val) {
         int cur = 0;

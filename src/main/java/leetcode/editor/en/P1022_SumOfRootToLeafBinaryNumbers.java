@@ -41,11 +41,6 @@ package leetcode.editor.en;
 
 import leetcode.util.TreeNode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * id: 1022
  * title: Sum of Root To Leaf Binary Numbers

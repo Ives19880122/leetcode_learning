@@ -86,10 +86,8 @@ import java.util.*;
  * @date    2021-10-04 00:25:31 
  */
 public class P13_RomanToInteger {
-    public static void main(String[] args) {
-        Solution solution = new P13_RomanToInteger().new Solution();
-    }    
-    //leetcode submit region begin(Prohibit modification and deletion)
+ 
+//leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int romanToInt(String s) {
         /**

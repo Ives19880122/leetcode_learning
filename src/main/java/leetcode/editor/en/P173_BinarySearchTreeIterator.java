@@ -65,8 +65,6 @@ package leetcode.editor.en;
 import leetcode.util.ListNode;
 import leetcode.util.TreeNode;
 
-import java.util.*;
-
 /**
  * id: 173
  * title: Binary Search Tree Iterator

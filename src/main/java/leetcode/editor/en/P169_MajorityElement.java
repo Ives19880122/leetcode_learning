@@ -26,8 +26,6 @@
     
 package leetcode.editor.en;
 
-import java.util.HashMap;
-
 /**
  * id: 169
  * title: Majority Element

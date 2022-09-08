@@ -23,8 +23,6 @@
     
 package leetcode.editor.en;
 
-import java.util.HashMap;
-
 /**
  * id: 387
  * title: First Unique Character in a String

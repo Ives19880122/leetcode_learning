@@ -69,11 +69,8 @@ package leetcode.editor.en;
  * @author  Ives.He 
  * @date    2021-10-04 22:14:42 
  */
-public class P26_RemoveDuplicatesFromSortedArray {
-    public static void main(String[] args) {
-        Solution solution = new P26_RemoveDuplicatesFromSortedArray().new Solution();
-    }    
-    //leetcode submit region begin(Prohibit modification and deletion)
+public class P26_RemoveDuplicatesFromSortedArray {  
+//leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int removeDuplicates(int[] nums) {
          // 參考寫法

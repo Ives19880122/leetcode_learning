@@ -42,10 +42,8 @@ import leetcode.util.ListNode;
  * @date    2021-10-05 23:09:20 
  */
 public class P21_MergeTwoSortedLists {
-    public static void main(String[] args) {
-        Solution solution = new P21_MergeTwoSortedLists().new Solution();
-    }    
-    //leetcode submit region begin(Prohibit modification and deletion)
+   
+//leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for singly-linked list.
  * public class ListNode {

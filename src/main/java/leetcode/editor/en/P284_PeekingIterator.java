@@ -55,10 +55,7 @@
     
 package leetcode.editor.en;
 
-import leetcode.util.ListNode;
-
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * id: 284

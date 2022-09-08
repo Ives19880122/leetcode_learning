@@ -66,7 +66,7 @@ class KthLargest {
       List<Integer> list;
       public KthLargest(int k, int[] nums) {
           this.n = k;
-          this.list = new ArrayList();
+          this.list = new ArrayList<>();
           for(int val : nums){
               setQueue(val);
           }

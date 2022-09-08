@@ -59,8 +59,6 @@
 
 package leetcode.editor.en;
 
-import java.util.Stack;
-
 /**
   * id：66
   * title：Plus One

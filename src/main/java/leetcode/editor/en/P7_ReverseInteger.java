@@ -32,11 +32,8 @@ package leetcode.editor.en;
  * @author  Ives.He 
  * @date    2021-10-03 23:23:48 
  */
-public class P7_ReverseInteger {
-    public static void main(String[] args) {
-        Solution solution = new P7_ReverseInteger().new Solution();
-    }    
-    //leetcode submit region begin(Prohibit modification and deletion)
+public class P7_ReverseInteger {  
+//leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int reverse(int x) {
         int result = x;

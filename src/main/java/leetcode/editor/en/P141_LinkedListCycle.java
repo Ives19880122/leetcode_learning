@@ -53,10 +53,6 @@ package leetcode.editor.en;
 
 import leetcode.util.ListNode;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 /**
   * id：141

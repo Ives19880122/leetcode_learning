@@ -50,10 +50,8 @@ package leetcode.editor.en;
  * @date    2021-10-03 21:22:18 
  */
 public class P1_TwoSum {
-    public static void main(String[] args) {
-        Solution solution = new P1_TwoSum().new Solution();
-    }
-    //leetcode submit region begin(Prohibit modification and deletion)
+
+//leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         for(int i=0; i<nums.length-1; i++){

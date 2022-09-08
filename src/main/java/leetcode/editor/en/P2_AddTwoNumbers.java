@@ -48,10 +48,8 @@ import leetcode.util.ListNode;
  * @date    2021-10-04 22:54:14 
  */
 public class P2_AddTwoNumbers {
-    public static void main(String[] args) {
-        Solution solution = new P2_AddTwoNumbers().new Solution();
-    }    
-    //leetcode submit region begin(Prohibit modification and deletion)
+  
+//leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Definition for singly-linked list.
  * public class ListNode {

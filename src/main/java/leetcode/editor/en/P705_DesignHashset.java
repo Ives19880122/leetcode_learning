@@ -46,9 +46,6 @@ package leetcode.editor.en;
 
 import leetcode.util.ListNode;
 
-import java.util.Hashtable;
-import java.util.LinkedList;
-
 /**
   * id：705
   * title：Design HashSet

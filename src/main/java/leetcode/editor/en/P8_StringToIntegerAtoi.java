@@ -136,11 +136,8 @@ package leetcode.editor.en;
  * @author  Ives.He 
  * @date    2021-10-04 02:21:26 
  */
-public class P8_StringToIntegerAtoi {
-    public static void main(String[] args) {
-        Solution solution = new P8_StringToIntegerAtoi().new Solution();
-    }    
-    //leetcode submit region begin(Prohibit modification and deletion)
+public class P8_StringToIntegerAtoi {  
+//leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int myAtoi(String s) {
         String tmp = s.trim();

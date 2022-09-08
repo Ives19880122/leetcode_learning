@@ -40,10 +40,7 @@ package leetcode.editor.en;
   * date：2021-10-06 12:26:54
 */
 public class P35_SearchInsertPosition {
-    public static void main(String[] args) {
-        Solution solution = new P35_SearchInsertPosition().new Solution();
-    }
-    //leetcode submit region begin(Prohibit modification and deletion)
+//leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int searchInsert(int[] nums, int target) {
         int step = 0;

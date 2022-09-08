@@ -65,17 +65,14 @@ import java.util.Stack;
   * version2 : char
 */
 public class P20_ValidParentheses {
-    public static void main(String[] args) {
-        Solution solution = new P20_ValidParentheses().new Solution();
-        System.out.println("Hello world");
-    }
-    //leetcode submit region begin(Prohibit modification and deletion)
+
+//leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean isValid(String s) {
         if(s.length()%2!=0) return false; // 單數判斷
         char[] arr = s.toCharArray();
         int step =0;
-        Stack<Character> tmp = new Stack();
+        Stack<Character> tmp = new Stack<>();
         while (step<arr.length){
             char cur = arr[step];
             if('('== cur ||'['== cur ||'{'== cur){

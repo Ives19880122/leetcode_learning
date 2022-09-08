@@ -38,8 +38,6 @@ package leetcode.editor.en;
 
 import leetcode.util.TreeNode;
 
-import java.util.PriorityQueue;
-
 /**
  * id: 99
  * title: Recover Binary Search Tree
