@@ -31,6 +31,8 @@
     
 package leetcode.editor.en;
 
+import java.util.Arrays;
+
 /**
  * id: 567
  * title: Permutation in String
@@ -45,40 +47,24 @@ public class P567_PermutationInString{
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
         if(s1.length()>s2.length()) return false;
-        int[] table = new int [26];
-        int len = s1.length();
-        // set record table
-        for (char c : s1.toCharArray()) {
-            table [c - 'a'] += 1;
+        if(s1.equals(s2)) return true;
+        int[] count1 = new int [26];
+        int[] count2 = new int [26];
+        int len1 = s1.length();
+        int len2 = s2.length();
+        // set slide window init
+        for (int i=0; i<len1; i++) {
+            count1 [s1.charAt(i) - 'a']++;
+            count2 [s2.charAt(i) - 'a']++;
         }
-        char[] arr = s2.toCharArray();
-        int start = 0;
-        int end = s2.length() - 1;
-        while(start <= end){
-            int[] ref = new int[26];
-            if(start+len <= arr.length){
-                for(int i=start; i<start+len; i++){
-                    ref [arr[i]-'a'] += 1;
-                }
-                if(isSame(table,ref)) return true;
-            }
-            ref = new int[26];
-            if(end-len>=0){
-                for(int i=end; i>end-len; i--){
-                    ref [arr[i]-'a'] += 1;
-                }
-                if(isSame(table,ref)) return true;
-            }
-            start++;
-            end--;
+        // move slide window (cansel head, add tail)
+        for(int i=len1; i<len2; i++){
+            if(Arrays.equals(count1,count2)) return true;
+            count2 [s2.charAt(i) - 'a']++;
+            count2 [s2.charAt(i-len1) - 'a' ]--;
         }
-        return false;
-    }
-    private boolean isSame(int[]o, int[]r){
-        for(int i=0; i< o.length; i++){
-            if(o[i]!=r[i]) return false;
-        }
-        return true;
+        // final check array equals
+        return Arrays.equals(count1,count2) ? true : false;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
