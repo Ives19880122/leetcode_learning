@@ -46,14 +46,20 @@ public class P119_PascalsTriangleIi{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public List<Integer> getRow(int rowIndex) {
-        if(rowIndex==0) return new ArrayList<>(Arrays.asList(1));
-        if(rowIndex==1) return new ArrayList<>(Arrays.asList(1,1));
-        List<Integer> pre = getRow(rowIndex-1);
-        while(--rowIndex>0){
-            pre.add(pre.remove(0)+pre.get(0));
+        int [][] dp = new int[rowIndex+1][rowIndex+1];
+        dp[0][0] = 1;
+        for(int i=1; i<=rowIndex; i++){
+            for(int j=0; j<=rowIndex; j++){
+                if(i==j) dp[i][j]=1;
+                else if(j==0) dp[i][j]=1;
+                else dp[i][j]=dp[i-1][j-1]+dp[i-1][j];
+            }
         }
-        pre.add(1);     // tail
-        return pre;
+        List<Integer> result = new ArrayList<>();
+        for(int i=0; i<dp[rowIndex].length; i++){
+            result.add(dp[rowIndex][i]);
+        }
+        return result;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
