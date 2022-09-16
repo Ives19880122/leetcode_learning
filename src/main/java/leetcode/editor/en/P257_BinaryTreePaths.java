@@ -61,21 +61,15 @@ public class P257_BinaryTreePaths{
  * }
  */
 class Solution {
+    private List<String> result = new ArrayList<>();
     public List<String> binaryTreePaths(TreeNode root) {
-        List<String> result = new ArrayList<>();
-        helper(root,result,String.valueOf(root.val));
+        helper(root,String.valueOf(root.val));
         return result;
     }
-    private void helper(TreeNode node, List<String> data, String parent){
-        if(node.left==null&&node.right==null){
-            data.add(parent);
-        }
-        if(node.left!=null) {
-            helper(node.left,data, String.format("%s->%s",parent,String.valueOf(node.left.val)));
-        }
-        if(node.right!=null){
-            helper(node.right,data, String.format("%s->%s",parent,String.valueOf(node.right.val)));
-        }
+    private void helper(TreeNode node, String parent){
+        if(node.left==null && node.right==null) result.add(parent);
+        if(node.left!=null) helper(node.left,String.format("%s->%d",parent,node.left.val));
+        if(node.right!=null) helper(node.right,String.format("%s->%d",parent,node.right.val));
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
