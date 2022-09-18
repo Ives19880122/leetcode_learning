@@ -47,24 +47,29 @@ public class P784_LetterCasePermutation{
 class Solution {
     private List<String> result = new ArrayList<>();
     public List<String> letterCasePermutation(String s) {
-        backtrack(s.toCharArray(),0);
+        backtrack(s.toCharArray(),0, new StringBuilder());
         return result;
     }
-    private void backtrack(char[] s , int idx){
-        if(s.length == idx){
-            result.add(new String(s));
+    private void backtrack(char[] s , int idx, StringBuilder track){
+        if(s.length == track.length()){
+            result.add(track.toString());
             return;
         }
         char c = s[idx];
         if(Character.isLetter(c)){
             // 小寫處理
-            s[idx] = Character.toLowerCase(c);
-            backtrack(s,idx+1);
+            c = Character.toLowerCase(c);
+            StringBuilder d1 = new StringBuilder(track.toString());
+            d1.append(c);
+            backtrack(s,idx+1, d1);
             // 大寫處理
-            s[idx] = Character.toUpperCase(c);
-            backtrack(s,idx+1);
+            c = Character.toUpperCase(c);
+            StringBuilder d2 = new StringBuilder(track.toString());
+            d2.append(c);
+            backtrack(s,idx+1 ,d2);
         } else{
-          backtrack(s,idx+1);
+            track.append(c);
+            backtrack(s,idx+1, track);
         }
     }
 }
