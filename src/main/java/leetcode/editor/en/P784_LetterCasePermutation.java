@@ -47,28 +47,25 @@ public class P784_LetterCasePermutation{
 class Solution {
     private List<String> result = new ArrayList<>();
     public List<String> letterCasePermutation(String s) {
-        backtrack(s.toCharArray(),new StringBuilder(),0);
+        backtrack(s.toCharArray(),0);
         return result;
     }
-    private void backtrack(char[] s, StringBuilder track, int start){
-        if(s.length == track.length()){
-            result.add(track.toString());
+    private void backtrack(char[] s , int idx){
+        if(s.length == idx){
+            result.add(new String(s));
             return;
         }
-        char c = s[start];
-        track.append(c);
-        if(c>=65 && c<97){ // 大寫65, 小寫97
-            c+=32;
-            StringBuilder db = new StringBuilder(track.toString());
-            db.setCharAt(start, c);
-            backtrack(s,db,start+1);
-        } else if(c>=97){
-            c-=32;
-            StringBuilder db = new StringBuilder(track.toString());
-            db.setCharAt(start, c);
-            backtrack(s,db,start+1);
+        char c = s[idx];
+        if(Character.isLetter(c)){
+            // 小寫處理
+            s[idx] = Character.toLowerCase(c);
+            backtrack(s,idx+1);
+            // 大寫處理
+            s[idx] = Character.toUpperCase(c);
+            backtrack(s,idx+1);
+        } else{
+          backtrack(s,idx+1);
         }
-        backtrack(s,track,start+1);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
