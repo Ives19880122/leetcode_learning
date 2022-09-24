@@ -47,19 +47,12 @@ public class P283_MoveZeroes {
          * @param nums
          */
         public void moveZeroes(int[] nums) {
-            int r = 0;
-            int len = nums.length;
-            while(0<len){
-                if(r==len-1){
-                    len--;
-                    r=0;
-                }else{
-                    if(nums[r]==0){
-                        nums[r] = nums[r+1];
-                        nums[r+1] = 0;
-                    }
-                    r++;
-                }
+            int idx = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if(nums[i]!=0) nums[idx++] = nums[i];
+            }
+            for (int i = idx; i < nums.length; i++) {
+                nums[i] = 0;
             }
         }
     }
