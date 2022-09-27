@@ -51,19 +51,18 @@ public class P1309_DecryptStringFromAlphabetToIntegerMapping{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public String freqAlphabets(String s) {
-        return s.replace("10#","j").replace("11#","k")
-                .replace("12#","l").replace("13#","m")
-                .replace("14#","n").replace("15#","o")
-                .replace("16#","p").replace("17#","q")
-                .replace("18#","r").replace("19#","s")
-                .replace("20#","t").replace("21#","u")
-                .replace("22#","v").replace("23#","w")
-                .replace("24#","x").replace("25#","y")
-                .replace("26#","z").replace("1","a")
-                .replace("2","b").replace("3","c")
-                .replace("4","d").replace("5","e")
-                .replace("6","f").replace("7","g")
-                .replace("8","h").replace("9","i");
+        int idx = s.length()-1;
+        StringBuffer sb = new StringBuffer();
+        while(idx>-1){
+            if(s.charAt(idx)=='#'){
+                sb.insert(0,(char)( Integer.valueOf(s.charAt(idx-2)+1-'1') * 10 + Integer.valueOf(s.charAt(idx-1)+1-'1') - 1 + 'a'));
+                idx -= 3;
+            }else{
+                sb.insert(0,(char)(Integer.valueOf(s.charAt(idx)+1-'1')-1+'a'));
+                idx--;
+            }
+        }
+        return sb.toString();
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
