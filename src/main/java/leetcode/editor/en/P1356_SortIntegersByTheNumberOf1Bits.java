@@ -55,22 +55,19 @@ public class P1356_SortIntegersByTheNumberOf1Bits{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] sortByBits(int[] arr) {
-        int[][] counts = new int [arr.length][2];
+        Integer[] data = new Integer[arr.length];
         // 放到暫存區內
-        for (int i = 0; i < arr.length; i++) {
-            counts[i][0] = arr[i];
-            counts[i][1] = getBitCount(arr[i]);
-        }
-        Arrays.sort(counts,(int[] a, int[] b)-> {
-           if(a[1]!=b[1]){  // 如果count數不同時,比較count數較大的
-               return a[1] - b[1];
-           }else{           // 如果count數相同時,比較原先的數字
-               return a[0] - b[0];
+        for (int i = 0; i < arr.length; i++)data[i]= arr[i];
+        Arrays.sort(data,(Integer a, Integer b)-> {
+            int c1 = getBitCount(a);
+            int c2 = getBitCount(b);
+            if(c1!=c2){  // 如果count數不同時,比較count數較大的
+               return c1 - c2;
+           }else{        // 如果count數相同時,比較原先的數字
+               return a - b;
            }
         });
-        for (int i = 0; i < counts.length; i++) {
-            arr[i] = counts[i][0];
-        }
+        for (int i = 0; i < data.length; i++) arr[i] = data[i];
         return arr;
     }
     private int getBitCount(int d){
