@@ -45,26 +45,18 @@ public class P69_Sqrtx{
   //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int mySqrt(int x) {
-        // 換成double避免溢位
-        double target = x;
-        double idx = 0;
-        while(idx<=target){
-            double mid = idx + (target-idx)/2;
-            if(mid*mid == x){
-                return (int)mid;
-            }else if(mid*mid<x){
-                idx = mid;
-            }
-
-            if(idx*idx == x){
-                return (int)idx;
-            }else if(idx*idx < x){
-                idx += 1;
-            }else if(idx*idx > x){
-                return (int)idx-1;
+        int max_sqrt = (int)Math.pow(Integer.MAX_VALUE,0.5);
+        int left = 0;
+        int right = max_sqrt+1;
+        while(left<right){
+            int mid = (right+left)/2;
+            if(mid*mid <= x){
+                left = mid+1;
+            }else{
+                right = mid;
             }
         }
-        return (int)idx;
+        return left-1;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
