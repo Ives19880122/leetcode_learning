@@ -81,20 +81,15 @@ public class P2095_DeleteTheMiddleNodeOfALinkedList{
 class Solution {
     public ListNode deleteMiddle(ListNode head) {
         if(head.next == null) return null;
-        int fast = 0;
-        int slow = 0;
-        ListNode tmp = head;
-        while(tmp!=null){
-            tmp = tmp.next;
-            fast++;
+        ListNode fast = head;
+        ListNode slow = head;
+        ListNode pre = head;
+        while(fast != null && fast.next!=null){
+            fast = fast.next.next;
+            pre = slow;
+            slow = slow.next;
         }
-        int m = fast / 2;
-        tmp = head;
-        while(slow < m-1){
-            tmp = tmp.next;
-            slow++;
-        }
-        tmp.next = tmp.next.next;
+        pre.next = slow.next;
         return head;
     }
 }
