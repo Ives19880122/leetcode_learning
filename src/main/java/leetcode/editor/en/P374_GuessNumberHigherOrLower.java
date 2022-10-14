@@ -49,7 +49,10 @@
 // Related Topics Binary Search Interactive 👍 1638 👎 227
     
 package leetcode.editor.en;
-/** 
+
+import leetcode.dummy.GuessGame;
+
+/**
  * id: 374
  * title: Guess Number Higher or Lower
  * author: Ives.He 
@@ -69,6 +72,7 @@ public class P374_GuessNumberHigherOrLower{
  * int guess(int num);
  */
 public class Solution extends GuessGame {
+
     public int guessNumber(int n) {
         int l = 1;
         int r = n;
