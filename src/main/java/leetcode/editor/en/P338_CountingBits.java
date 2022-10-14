@@ -47,7 +47,8 @@
 // Related Topics Dynamic Programming Bit Manipulation 👍 7890 👎 372
     
 package leetcode.editor.en;
-/** 
+
+/**
  * id: 338
  * title: Counting Bits
  * author: Ives.He 
@@ -60,16 +61,13 @@ public class P338_CountingBits{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] countBits(int n) {
-        int[] r = new int[n+1];
-        for (int i = 0; i <= n; i++) {
-            r[i] = getBitCount(i);
+        int[] dp = new int[n+1];
+        for (int i = 0; i <dp.length; i++) {
+            int t = i&1;
+            int sub = i>>>1;
+            dp[i] = t + dp[sub];
         }
-        return r;
-    }
-    private int getBitCount(int n){
-        if(n==0) return 0;
-        int t = n & 1;
-        return t + getBitCount(n>>>1);
+        return dp;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
