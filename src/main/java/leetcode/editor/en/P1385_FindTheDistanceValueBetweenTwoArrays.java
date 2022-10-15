@@ -79,18 +79,19 @@ class Solution {
         int count = 0;
         Arrays.sort(arr2);
         for (int num : arr1) {
-            if(isLongerThanDistance(num,arr2,d)) count++;
+            if(isInRange(arr2,num-d,num+d)) count++;
         }
         return count;
     }
 
-   private boolean isLongerThanDistance(int num, int[] arr, int d) {
+   private boolean isInRange(int[] arr, int from, int to) {
         int l = 0;
         int r = arr.length-1;
         while(l<=r){
-            if(d>=Math.abs(num-arr[l])||d>=Math.abs(num-arr[r])) return false;
-            l++;
-            r--;
+            int m = l + (r-l)/2;
+            if(arr[m]>=from && arr[m]<=to) return false;
+            else if(arr[m]<from) l = m+1;
+            else if(arr[m]>to) r = m-1;
         }
         return true;
    }
