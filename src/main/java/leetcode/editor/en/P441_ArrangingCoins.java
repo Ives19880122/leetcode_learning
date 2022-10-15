@@ -45,16 +45,16 @@ public class P441_ArrangingCoins{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int arrangeCoins(int n) {
-        int pre = 0;
-        for (int i = 1; i <= n; i++) {
-            n -= i;
-            if(n>=0){
-                pre++;
-            }else{
-                break;
-            }
+        long l = 0;
+        long r = n;
+        while (l<=r){
+            long m = l+(r-l)/2;
+            long v = m*(m+1)/2;
+            if(v==n) return (int)m;
+            if(v>n) r = m-1;
+            if(v<n) l = m+1;
         }
-        return pre;
+        return (int)r;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
