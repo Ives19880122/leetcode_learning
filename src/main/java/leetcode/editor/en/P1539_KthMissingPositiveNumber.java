@@ -53,14 +53,22 @@ public class P1539_KthMissingPositiveNumber{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int findKthPositive(int[] arr, int k) {
-        if(k<arr[0]) return k;
-        k -= arr[0]-1;
-        for (int i = 1; i < arr.length; i++) {
-            int dic = arr[i] - arr[i-1] - 1;
-            if(k-dic<=0) return arr[i-1]+k;
-            else k -= dic;
+        /**
+         * 二分搜尋法 l+k <= target <= r+k
+         * 找到中間的target就能逼出答案
+         * arr[m]-1-m 表示在m位子上缺漏的個數
+         * 1. 如果比k大，就要把右邊界降低
+         * 2. 如果比k小，就要把左邊界提高
+         * 3. 最終逼近出適當的範圍
+         */
+        int l = 0;
+        int r = arr.length;
+        while (l<r){
+            int m = l+(r-l)/2;
+            if(arr[m]-1-m >= k) r = m; // 大於或等於k的數量，r往左移
+            else l = m+1;              // 小於k的數量，l往右移
         }
-        return arr[arr.length-1] + k;
+        return l + k;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
