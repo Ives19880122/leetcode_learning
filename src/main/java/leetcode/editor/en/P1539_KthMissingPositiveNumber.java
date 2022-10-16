@@ -53,17 +53,14 @@ public class P1539_KthMissingPositiveNumber{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int findKthPositive(int[] arr, int k) {
-        int idx = 0;
-        int result = 0;
-        for(int i = 1; k!=0; i++){
-            if(idx<arr.length && arr[idx]==i) idx++;
-            else k--;
-            if(k==0) {
-                result = i;
-                break;
-            }
+        if(k<arr[0]) return k;
+        k -= arr[0]-1;
+        for (int i = 1; i < arr.length; i++) {
+            int dic = arr[i] - arr[i-1] - 1;
+            if(k-dic<=0) return arr[i-1]+k;
+            else k -= dic;
         }
-        return result;
+        return arr[arr.length-1] + k;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
