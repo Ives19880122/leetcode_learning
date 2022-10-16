@@ -44,26 +44,38 @@ public class P34_FindFirstAndLastPositionOfElementInSortedArray{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int [] result = {-1,-1};
+        int [] range = new int[2];
+        range[0] = findFirst(nums,target);
+        range[1] = findLast(nums,target);
+        return range;
+    }
+
+    private int findFirst(int [] nums, int target){
+        int idx = -1;
         int l = 0;
         int r = nums.length-1;
         while (l<=r){
-            if (nums[l] == target && nums[r]==target) {
-                result[0]=l;
-                result[1]=r;
-                break;
-            }else if(l==r){
-                break;
-            }
             int m = l + (r-l)/2;
-            if(nums[m]==target){
-                if(nums[l]!=target) l++;
-                if(nums[r]!=target) r--;
-            }
-            else if(nums[m]<target) l=m+1;
-            else if(nums[m]>target) r=m-1;
+            // 優先從尾端向左逼近<<<
+            if(nums[m]>=target) r=m-1;
+            else l=m+1;
+            if(nums[m]==target) idx = m;
         }
-        return result;
+        return idx;
+    }
+
+    private int findLast(int[] nums, int target){
+        int idx = -1;
+        int l = 0;
+        int r = nums.length-1;
+        while (l<=r){
+            int m = l + (r-l)/2;
+            // 優先從頭端向右逼近>>>
+            if(nums[m]<=target) l=m+1;
+            else r=m-1;
+            if(nums[m]==target) idx = m;
+        }
+        return idx;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
