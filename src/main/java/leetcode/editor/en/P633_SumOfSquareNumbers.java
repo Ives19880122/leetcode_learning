@@ -40,25 +40,14 @@ public class P633_SumOfSquareNumbers{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean judgeSquareSum(int c) {
-        int sqC = (int)Math.sqrt(c);
-        for (int i = sqC; i >=0 ; i--) {
-            int res = binarySearch(0,i,c);
-            if(res>=0) return true;
+        long l = 0;
+        long r = (long)Math.sqrt(c);
+        while(l<=r){
+            if(c>l*l+r*r) l++;
+            else if(c<l*l+r*r) r--;
+            else return true;
         }
         return false;
-    }
-
-    public int binarySearch(int start, int end, int target){
-        int valueR = (int)Math.pow(end,2);
-        while(start<=end){
-            int mid = start + (end-start)/2;
-            int valueL = (int) Math.pow(mid,2);
-            // 防止溢位
-            if(Integer.MAX_VALUE-valueR<valueL || target<valueL+valueR) end = mid-1;
-            else if(target>valueL+valueR) start = mid+1;
-            else return mid;
-        }
-        return -1;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
