@@ -49,25 +49,15 @@ class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         int cols = matrix[0].length;
         int rows = matrix.length;
-        // 超過matrix範圍區間則回傳false
-        if(matrix[0][0]>target || matrix[rows-1][cols-1]<target)return false;
-        int ref = -1;
-        while(rows>0){
-            if(matrix[rows-1][cols-1]>=target && matrix[rows-1][0]<=target) {
-                ref=rows-1;
-                break;
-            }
-            rows--;
-        }
-        // 找到某列範圍內才執行
-        if(ref!=-1){
-            int idx = 0;
-            while(idx<=cols){
-                // 左右夾擊,如果碰到target回傳true
-                if(target==matrix[ref][idx]||target==matrix[ref][cols-1]) return true;
-                idx++;
-                cols--;
-            }
+        // 把陣列當成一維
+        int start = 0;
+        int end = cols*rows -1;
+        // 透過binary search逼近結果
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            if(target>matrix[mid/cols][mid%cols]) start = mid + 1;
+            else if(target<matrix[mid/cols][mid%cols]) end = mid - 1;
+            else return true;
         }
         return false;
     }
