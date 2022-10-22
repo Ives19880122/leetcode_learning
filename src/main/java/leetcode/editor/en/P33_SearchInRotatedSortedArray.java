@@ -55,33 +55,17 @@ public class P33_SearchInRotatedSortedArray{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int search(int[] nums, int target) {
-        if(target==nums[0]) return 0;
-        // 紀錄rotate位置
-        int pivot = nums[0];
-        Arrays.sort(nums);
-        // 搜尋pivot inx
-        int k = binarySearch(nums, 0, nums.length-1, pivot);
-        int res = -1;
-        // 決定左右半邊依據 右: target > pivot, 左: target< pivot
-        if(target>pivot){
-            // 搜尋target 右半區
-            res = binarySearch(nums,k,nums.length-1,target);
-            if(res!=-1) return res - k;
-        }else{
-            // 搜尋target 左半區
-            res = binarySearch(nums,0,k-1,target);
-            if(res!=-1) return res + (nums.length-k);
-        }
-        // 找不到回傳 -1
-        return res;
-    }
-
-    public int binarySearch(int[] nums, int start, int end, int target){
+        int start = 0;
+        int end = nums.length - 1;
         while(start<=end){
             int mid = start + (end-start)/2;
             if(nums[mid]==target) return mid;
-            else if(nums[mid]>target) end = mid-1;
-            else if(nums[mid]<target) start = mid+1;
+            if(target>=nums[0] && nums[mid]>target ||   // mid在左側, 且mid>target(同側)
+               nums[mid]<nums[0] && target<nums[mid] || // mid在右側, 且mid>target(同側)
+               nums[mid]<nums[0] && nums[0]<=target     // mid在右側, 但target在左側(收斂)
+            ){
+                end = mid - 1;
+            }else start = mid + 1;
         }
         return -1;
     }
