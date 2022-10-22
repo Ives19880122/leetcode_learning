@@ -20,8 +20,6 @@
 
 package leetcode.editor.en;
 
-import java.util.Stack;
-
 /**
   * id：67
   * title：Add Binary
@@ -36,47 +34,18 @@ public class P67_AddBinary{
   //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public String addBinary(String a, String b) {
-        Stack<String> dp = new Stack<>();
+        StringBuilder sb = new StringBuilder();
         int l = a.length()-1;
         int r = b.length()-1;
         int plus = 0;
         while (l>=0 || r >= 0) {
-            char tl = '0';
-            char tr = '0';
-            String tmp = "";
-            if (l >= 0) {
-                tl = a.charAt(l);
-            }
-            if (r >= 0) {
-                tr = b.charAt(r);
-            }
-            if (tl == tr) {
-                tmp = plus == 1 ? "1" : "0";
-                if (tl == '1') {
-                    plus = 1;
-                }else{
-                    plus = 0;
-                }
-            } else {
-                if (plus == 1) {
-                    tmp = "0";
-                    plus = 1;
-                } else{
-                    tmp = "1";
-                }
-            }
-            l--;
-            r--;
-            dp.push(tmp);
+            if(l>=0) plus += a.charAt(l--) - '0';
+            if(r>=0) plus += b.charAt(r--) - '0';
+            sb.append(plus%2);
+            plus/=2;
         }
-        if(plus == 1){
-            dp.push("1");
-        }
-        String res = "";
-        while(!dp.isEmpty()){
-            res += dp.pop();
-        }
-        return res;
+        if(plus!=0) sb.append(plus);
+        return sb.reverse().toString();
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
