@@ -50,24 +50,14 @@ class Solution {
         // only 1 or 2 , 1 <= n <= 45
         // 下樓梯要每次都要重算一遍,往上爬則不用
         // return climbStairs(n-1) + climbStairs(n-2);
-        int left = 1;
-        int right = 2;
-        // 初始的狀況
-        if(n==left){
-            return left;
+        if(n<2) return 1;
+        int[] dp = new  int[n+1];
+        dp[1] = 1;  // 一階
+        dp[2] = 2;  // 二階
+        for (int i = 3; i < n+1 ; i++) {
+            dp[i] = dp[i-1] + dp[i-2];
         }
-        if(n==right){
-            return right;
-        }
-        int idx = 3;
-        // 一層爬一層的疊加
-        while(idx<n){
-            int tmp = right;
-            right = left+right;
-            left = tmp;
-            idx++;
-        }
-        return left + right;
+        return dp[n];
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
