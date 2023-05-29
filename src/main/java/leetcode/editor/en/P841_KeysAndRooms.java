@@ -64,26 +64,20 @@ public class P841_KeysAndRooms{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
-        Queue<Integer> keys = new LinkedList<>();
-        Set<Integer> visited = new HashSet<>();
-        visited.add(0);
-        // room 0
-        for(Integer key : rooms.get(0)){
-            keys.offer(key);
-        }
-        // no need key
-        for(int i = 1; i<rooms.size(); i++){
-            if(rooms.get(i).isEmpty()) visited.add(i);
-        }
-        // use key
-        while(!keys.isEmpty()){
-            int idx = keys.poll();
-            if(!visited.add(idx)) continue;
-            for(Integer key : rooms.get(idx)){
-                keys.offer(key);
+        boolean[] visited = new boolean[rooms.size()];
+        visited[0] = true;
+        Queue<Integer> queue = new LinkedList<>(rooms.get(0));
+        while(!queue.isEmpty()){
+            int room = queue.poll();
+            if(!visited[room]){
+                visited[room] = true;
+                queue.addAll(rooms.get(room));
             }
         }
-        return visited.size() == rooms.size();
+        for(boolean b : visited){
+            if(!b) return false;
+        }
+        return true;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
