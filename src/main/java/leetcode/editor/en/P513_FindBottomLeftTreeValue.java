@@ -63,28 +63,23 @@ public class P513_FindBottomLeftTreeValue{
  * }
  */
 class Solution {
-    private int deepest = 0;
 
     public int findBottomLeftValue(TreeNode root) {
-        Map<Integer, List<Integer>> map = new HashMap<>();
-        helper(root,0,map);
-        return map.get(deepest).get(0);
+        List<Integer> list = new ArrayList<>();
+        helper(root,0, list);
+        return list.get(list.size()-1);
     }
 
-    private void helper(TreeNode node, int level, Map<Integer, List<Integer>> map){
+    private void helper(TreeNode node, int level, List<Integer> list){
         if(node==null) return;
-        if(isLeaf(node)){
-            this.deepest = Math.max(deepest,level);
-            if(!map.containsKey(level)) map.put(level,new ArrayList<>());
-            map.get(level).add(node.val);
+        if(list.size()==level){ // 每層最左代表level逐層搜尋第一個會碰到的元素
+            list.add(node.val);
         }
-        helper(node.left,level+1,map);
-        helper(node.right,level+1,map);
+        helper(node.left,level+1,list);
+        helper(node.right,level+1,list);
     }
 
-    private boolean isLeaf(TreeNode node){
-        return node.left == null & node.right == null;
-    }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
