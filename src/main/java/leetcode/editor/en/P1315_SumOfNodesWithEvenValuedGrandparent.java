@@ -65,28 +65,18 @@ public class P1315_SumOfNodesWithEvenValuedGrandparent{
 class Solution {
     private int result = 0;
     public int sumEvenGrandparent(TreeNode root) {
-        helper(root);
+        helper(root,null,null);
         return result;
     }
-    /**
-     * traversal
-     */
-    public void helper(TreeNode node){
-        if(node == null) return;
-        if(node.val%2==0){
-            add(node,2);
+    public void helper(TreeNode current, TreeNode parent, TreeNode grand){
+        if(current == null) return;
+        if(parent!=null && grand!=null){
+            if(grand.val%2==0){
+                result+=current.val;
+            }
         }
-        helper(node.left);
-        helper(node.right);
-    }
-    /**
-     * add when find even grandparent
-     */
-    public void add(TreeNode node,int target){
-        if(node == null) return;
-        if(target == 0) this.result += node.val;
-        add(node.left,target-1);
-        add(node.right,target-1);
+        helper(current.left,current,parent);
+        helper(current.right,current,parent);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
