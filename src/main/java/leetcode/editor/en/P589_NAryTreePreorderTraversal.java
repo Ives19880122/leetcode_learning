@@ -74,17 +74,16 @@ class Node {
 */
 
 class Solution {
-    List<Integer> result = new ArrayList<>();
     public List<Integer> preorder(Node root) {
-        helper(root);
+        List<Integer> result = new ArrayList<>();
+        helper(root,result);
         return result;
     }
-
-    public void helper(Node root){
-        if(root==null) return;
-        result.add(root.val);
-        while(root.children.size()>0 ){
-            helper(root.children.remove(0));
+    private void helper(Node node, List<Integer>list){
+        if(node==null) return;
+        list.add(node.val);
+        for(Node child : node.children){
+            helper(child,list);
         }
     }
 
