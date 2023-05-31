@@ -60,66 +60,20 @@ package leetcode.editor.en;
 public class P463_IslandPerimeter{
     //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
-        private int result = 0;
-        private int rowMax = 0;
-        private int colMax = 0;
-
         public int islandPerimeter(int[][] grid) {
-            this.rowMax = grid.length-1;
-            this.colMax = grid[0].length-1;
-            int[][] viewed = new int[grid.length][grid[0].length];
-            // from start 0,0
-            for(int i =0; i<grid.length; i++){
-                for(int j=0; j<grid[0].length; j++){
-                    if(viewed[i][j]!=0) continue;
-                    viewed[i][j] = 1;
-                    helper(i,j,grid);
+            int output = 0;
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid[i].length; j++) {
+                    if (grid[i][j] == 1){
+                        output += 4;
+                        if (j-1 >= 0 && grid[i][j-1] == 1)  output -= 1;
+                        if (j+1 != grid[i].length && grid[i][j+1] == 1)  output -=1;
+                        if (i-1 >= 0 && grid[i-1][j] == 1)   output -= 1;
+                        if (i+1 != grid.length && grid[i+1][j] == 1) output -=1;
+                    }
                 }
             }
-            // from end grid.length-1, grid.length-1
-            for(int i =rowMax; i>0; i--){
-                for(int j=colMax; j>0; j--){
-                    if(viewed[i][j]!=0) continue;
-                    viewed[i][j] = 1;
-                    helper(i,j,grid);
-                }
-            }
-            return this.result;
-        }
-
-        private void helper(int i,int j, int[][]grid){
-            if(grid[i][j]==0) return;
-            if(isCorner(i,j)){
-                if(this.rowMax==0&&this.colMax==0) this.result+=2;
-                else if(this.rowMax==0||this.colMax==0)this.result += 1;
-                this.result+=2;
-            }
-            else if(isEdge(i,j)) {
-                if(this.rowMax==0 || this.colMax==0) this.result+=1;
-                this.result +=1;
-            }
-            if(isNextEmpty(i+1,j,grid)) this.result +=1;
-            if(isNextEmpty(i-1,j,grid)) this.result +=1;
-            if(isNextEmpty(i,j+1,grid)) this.result +=1;
-            if(isNextEmpty(i,j-1,grid)) this.result +=1;
-        }
-
-        private boolean isCorner(int row, int col){
-            return (row==0 && col==0) || (row==0 && col==this.colMax) ||
-                    (row==this.rowMax && col==0) || (row==this.rowMax && col==this.colMax);
-        }
-
-        private boolean isEdge(int row, int col){
-            return row==0 || row == this.rowMax || col == 0 || col == this.colMax;
-        }
-
-        private boolean isNextEmpty(int rowN, int colN, int[][]grid){
-            if(isOverRange(rowN,colN)||grid[rowN][colN]==1) return false;
-            return true;
-        }
-
-        private boolean isOverRange(int row, int col){
-            return row<0 || row > rowMax || col<0 || col> colMax;
+            return output;
         }
 }
 //leetcode submit region end(Prohibit modification and deletion)
