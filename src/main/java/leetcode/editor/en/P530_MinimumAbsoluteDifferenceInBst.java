@@ -65,21 +65,22 @@ public class P530_MinimumAbsoluteDifferenceInBst{
  * }
  */
 class Solution {
+    private  TreeNode prev;
+    private int min = Integer.MAX_VALUE;
+
     public int getMinimumDifference(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        inorder(root,list);
-        int min = Integer.MAX_VALUE;
-        for(int i=1; i<list.size();i++){
-            min =Math.min(min, list.get(i)-list.get(i-1));
-        }
+        dfs(root);
         return min;
     }
 
-    private void inorder(TreeNode node, List<Integer> list){
+    private void dfs(TreeNode node){
         if(node==null) return;
-        inorder(node.left,list);
-        list.add(node.val);
-        inorder(node.right,list);
+        dfs(node.left);
+        if(prev!=null){
+            this.min = Math.min(this.min,node.val-prev.val);
+        }
+        prev=node;
+        dfs(node.right);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
