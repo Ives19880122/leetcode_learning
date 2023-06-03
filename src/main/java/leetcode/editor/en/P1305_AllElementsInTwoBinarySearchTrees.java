@@ -32,7 +32,9 @@ package leetcode.editor.en;
 import leetcode.util.TreeNode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * id: 1305
@@ -62,38 +64,33 @@ public class P1305_AllElementsInTwoBinarySearchTrees{
  */
 class Solution {
     public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        Queue<Integer> ref = new LinkedList<>();
+        dfs(root1,ref);
         List<Integer> list = new ArrayList<>();
-        dfs(root1,list);
-        int l = list.size();
-        dfs(root2,list);
-        int r = list.size();
-        mergeSort(list,l,r);
+        dfs(root2,list,ref);
+        list.addAll(ref);
         return list;
     }
-    private void dfs(TreeNode node, List<Integer> list){
+
+    /**
+     * 使用Queue裝載inorder traversal的排序資料
+     */
+    private void dfs(TreeNode node, Queue<Integer> ref){
         if(node==null) return;
-        dfs(node.left,list);
-        list.add(node.val);
-        dfs(node.right,list);
+        dfs(node.left,ref);
+        ref.offer(node.val);
+        dfs(node.right,ref);
     }
-    private void mergeSort(List<Integer>list,int l, int r){
-        List<Integer> keep = new ArrayList<>();
-        int i = 0; int j =l;
-        while(i<l&&j<r){
-            if(list.get(i)<=list.get(j)){
-                keep.add(list.get(i++));
-            }else{
-                keep.add(list.get(j++));
-            }
-        }
-        while (i < l) {
-            keep.add(list.get(i++));
-        }
-        while (j < r) {
-            keep.add(list.get(j++));
-        }
-        list.clear();
-        list.addAll(keep);
+
+    /**
+     * 透過ref取得前一個樹的排序資料,同時inorder traversal+merge
+     */
+    private void dfs(TreeNode node, List<Integer> list, Queue<Integer> ref){
+        if(node==null) return;
+        dfs(node.left,list,ref);
+        while(!ref.isEmpty() && ref.peek()<=node.val) list.add(ref.poll());
+        list.add(node.val);
+        dfs(node.right,list,ref);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
