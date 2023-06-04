@@ -93,31 +93,18 @@ public class P2415_ReverseOddLevelsOfBinaryTree{
  */
 class Solution {
     public TreeNode reverseOddLevels(TreeNode root) {
-        LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
-        int level = 0;
-        queue.add(root);
-        while(!queue.isEmpty()){
-            int n = queue.size();
-            if(level%2==1){
-                reverse(queue,0,n-1);
-            }
-            for(int i =0; i<n; i++){
-                TreeNode node = queue.poll();
-                if(node.left!=null) queue.add(node.left);
-                if(node.right!=null) queue.add(node.right);
-            }
-            level++;
-        }
+        reverse(root.left,root.right,1);
         return root;
     }
-    private void reverse(LinkedList<TreeNode> queue,int l, int r){
-        while(l<r){
-            TreeNode nl = queue.get(l++);
-            TreeNode nr = queue.get(r--);
-            int tmp = nl.val;
-            nl.val = nr.val;
-            nr.val = tmp;
+    private void reverse(TreeNode l, TreeNode r, int level){
+        if(l==null)return;
+        if(level%2==1){
+            int tmp = l.val;
+            l.val = r.val;
+            r.val = tmp;
         }
+        reverse(l.left,r.right,level+1);
+        reverse(l.right,r.left,level+1);
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
