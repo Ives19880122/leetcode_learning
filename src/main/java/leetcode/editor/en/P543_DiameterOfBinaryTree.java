@@ -64,16 +64,16 @@ public class P543_DiameterOfBinaryTree{
  * }
  */
 class Solution {
+    private int max = 0;
     public int diameterOfBinaryTree(TreeNode root) {
-        int[] dp = new int[1];
-        maxDeep(root,dp);
-        return dp[0];
+        maxDeep(root);
+        return max;
     }
-    public int maxDeep(TreeNode root, int[] dp){
+    public int maxDeep(TreeNode root){
         if(root==null) return 0;
-        int l = maxDeep(root.left,dp);
-        int r = maxDeep(root.right,dp);
-        dp[0] = Math.max(dp[0],l+r);
+        int l = maxDeep(root.left);
+        int r = maxDeep(root.right);
+        this.max = Math.max(this.max,l+r);
         return 1 + Math.max(l,r);
     }
 }
