@@ -58,34 +58,22 @@ public class P234_PalindromeLinkedList{
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        ListNode l = copy(head);
-        ListNode r = reverse(head);
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast.next!=null && fast.next.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        // 半段資料反轉
+        ListNode n = reverse(slow);
 
         // 相互比較是否Palindrome
-        while(l!=null && r!=null){
-            if(l.val != r.val) return false;
-            l = l.next;
-            r = r.next;
+        while(head!=null && n!=null){
+            if(head.val != n.val) return false;
+            head = head.next;
+            n = n.next;
         }
         return true;
-    }
-
-    // 複製一份
-    private ListNode copy(ListNode head){
-        ListNode tmp = null;
-        ListNode node = null;
-        while(head!=null){
-            if(node==null) {
-                node = new ListNode(head.val);
-                tmp = node;
-            }
-            else {
-                node.next = new ListNode(head.val);
-                node = node.next;
-            }
-            head = head.next;
-        }
-        return tmp;
     }
 
     // 取得反轉的ListNode
